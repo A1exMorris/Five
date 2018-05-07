@@ -1,0 +1,45 @@
+body, html{
+  height: 100%;
+}
+.paral{
+
+
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+
+  p{
+    background-color: #ffffff;
+    opacity: 0.6;
+    filter:alpha(opacity=60);
+  }
+}
+
+
+.paralsec1 {
+background-image: url("../i/1.jpg");
+height: 100%;
+
+}
+.paralsec2{
+  background-image: url("../i/2.jpg");
+  height: 100%;
+}
+.paralsec3{
+  background-image: url("../i/3.jpg");
+  height: 100%;
+
+}
+.paralsec4{
+  background-image: url("../i/4.jpg");
+  height: 100%;
+}
+.paralsec5{
+  background-image: url("../i/5.jpg");
+ height: 100%;
+}
+.jumbotron{
+  margin-bottom: 0;
+}
