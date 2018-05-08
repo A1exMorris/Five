@@ -3,7 +3,6 @@ body, html{
 }
 .paral{
 
-
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
@@ -13,13 +12,13 @@ body, html{
   p{
     background-color: #ffffff;
     opacity: 0.6;
-    filter:alpha(opacity=60);
+   // filter:alpha(opacity=60);
   }
 }
 
 
 .paralsec1 {
-background-image: url("../i/1.jpg");
+background-image: url("../i/1.gif");
 height: 100%;
 
 }
