@@ -35,7 +35,7 @@ var path = {
         html: "src/**/*.{htm,html,php}",
         js: "src/assets/js/*.js",
         css: "src/assets/sass/**/style.scss",
-        img: "src/assets/i/**/*.jpg*",
+        img: "src/assets/i/**/*.{jpg,png}*",
         fonts: "src/assets/fonts/**/*.*"
     },
     watch: {
@@ -138,7 +138,7 @@ gulp.task("image:build", function () {
 gulp.task("image:width", function () {
     gulp.src(path.src.img)
         .pipe(imageResize({
-            width : 3000
+            width : 2500
         }))
         .pipe(imagemin({
             progressive: true,

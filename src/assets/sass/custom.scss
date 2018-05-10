@@ -33,8 +33,14 @@ body{
   opacity: 0.3;
 }
 
-
-
-
+@font-face {
+  font-family: cheltenham;
+  src: url('../fonts/cheltenham-cond-normal-300.ttf');
+}
+@font-face {
+  font-family: franklin;
+  src: url('../fonts/franklin-cword-normal-500.ttf');
+}
+$font-family-base:franklin;
 
 

@@ -10,7 +10,6 @@
 //= ../../../bower_components/bootstrap/js/dist/dropdown.js
 //= ../../../bower_components/clamp-js/clamp.js
 
-
 //= custom/tooltips.js
 //= custom/popover.js
 //= custom/clump.js

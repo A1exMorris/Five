@@ -5,7 +5,7 @@ body, html{
 
   background-attachment: fixed;
   background-size: cover;
-  background-position: center;
+  background-position: right top;
   background-repeat: no-repeat;
 
 
@@ -18,19 +18,39 @@ body, html{
 
 
 .paralsec1 {
-background-image: url("../i/mainSlider.jpg");
-height: 100%;
+background-image: url("../i/mainSlider1.jpg");
+  height: 105%;
+border-radius: 0;
 
 }
+
+
+/*animation: flickerAnimation 20s infinite;
+transition-timing-function: ease-in-out;*/
+@keyframes flickerAnimation { /* flame pulses */
+  0% {
+    background-image: url('../i/mainSlider1.jpg');
+  }
+  30% {
+    background-image: url('../i/mainSlider2.jpg');
+  }
+  70% {
+    background-image: url('../i/mainSlider3.jpg');
+  }
+}
+
 .paralsec2{
-  background-image: url("../i/2.jpg");
+  background-image: url("../i/mainSlider2.jpg");
   height: 100%;
 }
+
 .paralsec3{
-  background-image: url("../i/3.jpg");
+  background-image: url("../i/mainSlider3.jpg");
   height: 100%;
 
 }
+
+/*Other*/
 .paralsec4{
   background-image: url("../i/4.jpg");
   height: 100%;
@@ -42,3 +62,4 @@ height: 100%;
 .jumbotron{
   margin-bottom: 0;
 }
+

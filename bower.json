@@ -14,7 +14,7 @@
   "dependencies": {
     "normalize.css": "*",
     "jquery": "2.*",
-    "bootstrap": "4.1",
+    "bootstrap": "4.1.0",
       "popper.js": "1.14.3",
       "clamp-js":"",
     "fancyBox":"",
