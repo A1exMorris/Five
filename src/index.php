@@ -21,7 +21,7 @@
 
   <body>
 
-    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-top h1">
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-top h4">
 <!--      <a class="navbar-brand h1" href="#">NP</a>
 -->      <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -69,11 +69,11 @@
         </div>
 
     </div>
-    <div class="container">
+    <div class="container" style="height: 100%">
         <p class="h1">dddddddddddd</p>
 
     </div>
-    <div class="row jumbotron paral paralsec3">
+    <div class="row jumbotron paral paralsec2">
         <div class="col-12 col-sm-6 order-last order-sm-1 order-md-1 order-lg-1 order-xl-1" >
             <div class="row h-100 align-items-end">
                 <div class="col-12 text-left text-center">
