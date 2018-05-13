@@ -7,40 +7,44 @@
   padding: $card-img-overlay-padding;
 }
 
-html{
-  position: relative;
-  min-height: 100%;
+
+.nytmn_divider{
+  display: inline-block;
+  width: 65px;
+  height: 2px;
+  background: $white;
+  opacity: 0.7;
+  margin: 20px auto;
+}
+.mainTitle1{
+
+    color: $navbar-dark-color!important;
+
 }
 
-body{
-  width: 100%;
-  /*
-  padding-top: 60px;
-  */
-  margin-bottom:  60px;
-}
-.footer {
- // position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
-  line-height: 60px;
-  background-color: $gray-500 ;
-  color: $black;
-}
 
 .card:hover .card-img-top{
   opacity: 0.3;
 }
 
+.mainContent{
+  color: $black;
+  opacity: 0.8;
+  padding-right: 0px;
+
+}
 @font-face {
   font-family: cheltenham;
-  src: url('../fonts/cheltenham-cond-normal-300.ttf');
+  src: local('Cheltenham'),
+          url('../fonts/cheltenham-cond-normal-300.ttf');
 }
 @font-face {
-  font-family: franklin;
-  src: url('../fonts/franklin-cword-normal-500.ttf');
+  font-family: 'Conv_franklin-cword-normal-500';
+  src: url('../fonts/franklin-cword-normal-500.eot');
+  src: local('☺'), url('../fonts/franklin-cword-normal-500.woff') format('woff'), url('../fonts/franklin-cword-normal-500.ttf') format('truetype'), url('../fonts/franklin-cword-normal-500.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
-$font-family-base:franklin;
+
 
 

@@ -1,4 +1,4 @@
 $(window).ready(function(){
     /* немного другой эффект появления, и задержка в 2 секунды */
-    $('.fadeInTitle').fadeIn(2000);
+    $('.fadeInTitle').fadeIn(3000);
 });
