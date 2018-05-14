@@ -71,7 +71,7 @@
         <div class="row no-gutters">
             <div class="col h5 d-flex align-self-center text-center" style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif">
 
-                <span>
+                <div class="container p-5">
                               <p class="h1 text-center" style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif">
                                   Здравствуйте!
                               </p>
@@ -84,7 +84,7 @@
                         <br>
                         <br>
                         Съемки провожу в основном в Санкт-Петербурге.
-                    </span>
+                    </div>
 
             </div>
 

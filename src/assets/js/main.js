@@ -9,6 +9,7 @@
 //= ../../../bower_components/bootstrap/js/dist/collapse.js
 //= ../../../bower_components/bootstrap/js/dist/dropdown.js
 //= ../../../bower_components/clamp-js/clamp.js
+//= ../../../bower_components/fancyBox/dist/jquery.fancybox.js
 
 //= custom/tooltips.js
 //= custom/popover.js
