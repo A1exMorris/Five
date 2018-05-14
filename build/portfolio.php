@@ -50,143 +50,219 @@
 </nav>
 <!--Navbar-->
 
-
+<div class="container">
     <div class="card-columns ">
-        <div class="card no-gutters">
-            <a href="assets/i/1.jpg" data-fancybox="gallery" data-caption="Caption1">
-                <img class="card-img-top" src="assets/i/thumbs/1.jpg" alt=""/>
-            </a>
-        </div>
         <div class="card">
+
+            <a href="assets/i/1.jpg" data-fancybox="gallery" data-caption="Caption1">
+
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/1.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
+
+            </a>
+
+
+        </div>
+        <div class="card ">
             <a href="assets/i/2.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/2.jpg" alt=""/>
+
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/2.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
+
             </a>
         </div>
         <div class="card">
             <a href="assets/i/3.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/3.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/3.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
         <div class="card">
             <a href="assets/i/4.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/4.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/4.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
         <div class="card">
             <a href="assets/i/5.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/5.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/5.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
         <div class="card">
             <a href="assets/i/mainSelfi.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/mainSelfi.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/mainSelfi.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
         <div class="card">
             <a href="assets/i/mainSlider1.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/mainSlider1.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/mainSlider1.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
         <div class="card">
             <a href="assets/i/1.jpg" data-fancybox="gallery" data-caption="Caption1">
-                <img class="card-img-top" src="assets/i/thumbs/1.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/1.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
         <div class="card">
             <a href="assets/i/2.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/2.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/2.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
         <div class="card">
             <a href="assets/i/3.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/3.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/3.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
         <div class="card">
             <a href="assets/i/4.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/4.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/4.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
         <div class="card">
             <a href="assets/i/5.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/5.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/5.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
         <div class="card">
             <a href="assets/i/1.jpg" data-fancybox="gallery" data-caption="Caption1">
-                <img class="card-img-top" src="assets/i/thumbs/1.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/1.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
         <div class="card">
             <a href="assets/i/mainSelfi.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/mainSelfi.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/mainSelfi.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
         <div class="card">
             <a href="assets/i/mainSelfi.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/mainSelfi.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/mainSelfi.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
         <div class="card">
             <a href="assets/i/mainSlider1.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/mainSlider1.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/mainSlider1.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
 
         <div class="card">
             <a href="assets/i/1.jpg" data-fancybox="gallery" data-caption="Caption1">
-                <img class="card-img-top" src="assets/i/thumbs/1.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/1.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
         <div class="card">
             <a href="assets/i/mainSelfi.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/mainSelfi.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/mainSelfi.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
         <div class="card">
             <a href="assets/i/mainSlider1.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/mainSlider1.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/mainSlider1.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
         <div class="card">
             <a href="assets/i/2.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/2.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/2.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
         <div class="card">
             <a href="assets/i/3.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/3.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/3.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
         <div class="card">
             <a href="assets/i/4.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/4.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/4.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
         <div class="card">
             <a href="assets/i/5.jpg" data-fancybox="gallery" data-caption="Caption2">
-                <img class="card-img-top" src="assets/i/thumbs/5.jpg" alt=""/>
+                <div class="hover-image">
+                <img class="card-img-top scaleImage" src="assets/i/thumbs/5.jpg" alt=""/>
+                <div class="icon-expand"></div>
+                    </div>
             </a>
         </div>
 
 
     </div>
 
-
+</div>
 
 <div class="footer text-center pt-3 pb-3" style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif">
     <div class="container-fluid">
