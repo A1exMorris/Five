@@ -691,7 +691,7 @@ $jumbotron-bg:                      $gray-200 !default;
 
 $card-spacer-y:                     0;/*Change margin bot cards*/
 $card-spacer-x:                     1.25rem !default;
-$card-border-width:                 0; /*Change border cards*/
+$card-border-width:                 2px; /*Change border cards*/
 $card-border-radius:                $border-radius !default;
 $card-border-color:                 rgba($black, .125) !default;
 $card-inner-border-radius:          calc(#{$card-border-radius} - #{$card-border-width}) !default;

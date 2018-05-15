@@ -19,7 +19,7 @@
 
 </head>
 
-<body>
+<body style="padding-top: 92px;">
 <nav class="navbar navbar-expand-md navbar-dark bg-secondary fixed-top h4" style="font-family: cheltenham">
 
     <a class="navbar-brand h1" href="index.php"><img src="assets/i/logo2.png" width="60" height="60" class="d-inline-block align-top" style="opacity: 0.5" alt="">  </a> <a style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif; opacity: 0.5" href="index.php">NPhotography</a>
@@ -49,10 +49,21 @@
     </div>
 </nav>
 <!--Navbar-->
+<div class="container pb-5 pt-5 bg-secondary">
+    <div class="row">
+        <div class="col-12">
+            <div class="card box-shadow">
+                <img class="card-img-top pt-3" style=" width:100%; height: 400px; object-fit:scale-down;" src="assets/i/thumbs/mainSelfi.jpg">
+                <div class="card-body d-flex flex-column align-items-start">
+                    <strong>Чуть чуть заголовок</strong>
+                    <h3> Заголовок </h3>
+                    <p class="card-text">Lorem ipsum съешь этих вкусных французских булок</p>
+                </div>
+                <div class="card-footer">2 дня назад </div>
 
-<div class="row jumbotron paral paralsec2 m-0" id="mainSlider">
-
-
+            </div>
+        </div>
+    </div>
 </div>
 <div class="footer text-center pt-3 pb-3" style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif">
     <div class="container-fluid">

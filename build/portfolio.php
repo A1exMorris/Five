@@ -51,19 +51,14 @@
 <!--Navbar-->
 
 <div class="container">
-    <div class="card-columns ">
+    <div class="card-columns">
         <div class="card">
-
             <a href="assets/i/1.jpg" data-fancybox="gallery" data-caption="Caption1">
-
                 <div class="hover-image">
                 <img class="card-img-top scaleImage" src="assets/i/thumbs/1.jpg" alt=""/>
                 <div class="icon-expand"></div>
                     </div>
-
             </a>
-
-
         </div>
         <div class="card ">
             <a href="assets/i/2.jpg" data-fancybox="gallery" data-caption="Caption2">

@@ -19,7 +19,7 @@
 
 </head>
 
-<body>
+<body style="padding-top: 92px;">
 <nav class="navbar navbar-expand-md navbar-dark bg-secondary fixed-top h4" style="font-family: cheltenham">
 
     <a class="navbar-brand h1" href="index.php"><img src="assets/i/logo2.png" width="60" height="60" class="d-inline-block align-top" style="opacity: 0.5" alt="">  </a> <a style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif; opacity: 0.5" href="index.php">NPhotography</a>
@@ -50,9 +50,33 @@
 </nav>
 <!--Navbar-->
 
-<div class="row jumbotron paral paralsec2 m-0" id="mainSlider">
+<div class="container-fluid pt-5" >
 
+    <div class="flickerAnimation paral2" style="height: 600px"></div>
 
+<img class="imageTrans" src="assets/i/piter.jpg" style="width: 120px; height: 120px; border-radius: 50%; position: absolute; right: 0;top: 0;">
+    <div class="loader" style="position: absolute; right: 0;top:0;"></div>
+    <div class="container pt-5 pb-5 ">
+        <div class="row">
+            <div class="col-6">
+                <h1>Контакты</h1>
+                <p>Мы всегда рады новым встречам!</p>
+                <p>Тел.: 8 996 768 62 20</p>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="guestName" placeholder="Ваше имя">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="guestEmail" placeholder="Ваша почта">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="textGuest" placeholder="Ваше сообщение" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"> ОТПРАВИТЬ </button>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="footer text-center pt-3 pb-3" style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif">
     <div class="container-fluid">
