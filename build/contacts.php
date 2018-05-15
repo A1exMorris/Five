@@ -50,12 +50,12 @@
 </nav>
 <!--Navbar-->
 
-<div class="container-fluid pt-5" >
+<div class="container pt-5" >
 
-    <div class="flickerAnimation paral2" style="height: 600px"></div>
+    <div class="flickerAnimation paral2" style="height: 400px"></div>
 
-<img class="imageTrans" src="assets/i/piter.jpg" style="width: 120px; height: 120px; border-radius: 50%; position: absolute; right: 0;top: 0;">
-    <div class="loader" style="position: absolute; right: 0;top:0;"></div>
+ <!--   <img class="imageTrans" src="assets/i/piter.jpg" style="width: 120px; height: 120px; border-radius: 50%; position: absolute; right: 0;top: 0;">
+    <div class="loader" style="position: absolute; right: 0;top:0;"></div>-->
     <div class="container pt-5 pb-5 ">
         <div class="row">
             <div class="col-6">
@@ -73,7 +73,7 @@
                 <div class="form-group">
                     <textarea class="form-control" id="textGuest" placeholder="Ваше сообщение" rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary"> ОТПРАВИТЬ </button>
+                <button type="submit" class="btn-lg btn-primary"> ОТПРАВИТЬ </button>
             </div>
         </div>
     </div>
