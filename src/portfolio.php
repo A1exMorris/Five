@@ -51,8 +51,8 @@
 <!--Navbar-->
 
 <a href="category.php">
-     <div class="row bg-dark mx-0 p-5" >
-         <div class="col-4 align-self-center text-center text-secondary h1" >Свадебная фотосессия</div>
+     <div class="row bg-gray-light mx-0 p-5" >
+         <div class="col-4 align-self-center text-center text-light h1" >Свадебная фотосессия</div>
          <div class="col-8 align-self-center text-center">
                 <img class="img-fluid" src="assets/i/thumbs/2.jpg" alt=""/>
          </div>
@@ -68,8 +68,8 @@
      </div>
 </a>
 <a href="category.php">
-     <div class="row bg-dark mx-0 p-5">
-         <div class="col-4 align-self-center text-center text-secondary h1" >Индивидуальная фотосессия</div>
+     <div class="row bg-gray-light mx-0 p-5">
+         <div class="col-4 align-self-center text-center text-light h1" >Индивидуальная фотосессия</div>
 
          <div class="col-8 align-self-center text-center">
              <img class="img-fluid" src="assets/i/thumbs/2.jpg" alt=""/>
