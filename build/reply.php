@@ -50,10 +50,108 @@
 </nav>
 <!--Navbar-->
 
-<div class="row jumbotron paral paralsec2 m-0" id="mainSlider">
 
+    <div class="container">
+        <div class="card-columns" style="column-gap: 20px">
+            <div class="card p-3 my-3 bg-light border-dark">
+                <img src="assets/i/3.jpg" class="align-self-center mt-5" width="200" height="200" style="border-radius: 50%; object-fit:cover; ">
+                <div class="card-body p-0">
+                    <h5 class="card-title m-2 text-center">ОТзыв 1</h5>
+                    <p class="card-text m-2 text-center">Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum </p>
+                </div>
+                    <a href="#" class="btn btn-primary m-3">Прочесть целиком</a>
+            </div>
+            <div class="card p-3 my-3 bg-light border-dark">
+                <img src="assets/i/3.jpg" class="align-self-center mt-5" width="200" height="200" style="border-radius: 50%; object-fit:cover; ">
+                <div class="card-body p-0">
+                    <h5 class="card-title m-2 text-center">ОТзыв 1</h5>
+                    <p class="card-text m-2 text-center">кий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum </p>
+                </div>
+                <a href="#" class="btn btn-primary m-3">Прочесть целиком</a>
+            </div>
+            <div class="card p-3 my-3 bg-light border-dark">
+                <img src="assets/i/3.jpg" class="align-self-center mt-5" width="200" height="200" style="border-radius: 50%; object-fit:cover; ">
+                <div class="card-body p-0">
+                    <h5 class="card-title m-2 text-center">ОТзыв 1</h5>
+                    <p class="card-text m-2 text-center">Короткий отзыв Lorem ipsum КороКороткий отзыв Lorem ыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum </p>
+                </div>
+                <a href="#" class="btn btn-primary m-3">Прочесть целиком</a>
+            </div>
+            <div class="card p-3 my-3 bg-light border-dark">
+                <img src="assets/i/3.jpg" class="align-self-center mt-5" width="200" height="200" style="border-radius: 50%; object-fit:cover; ">
+                <div class="card-body p-0">
+                    <h5 class="card-title m-2 text-center">ОТзыв 1</h5>
+                    <p class="card-text m-2 text-center">Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum </p>
+                </div>
+                <a href="#" class="btn btn-primary m-3">Прочесть целиком</a>
+            </div>
+            <div class="card p-3 my-3 bg-light border-dark">
+                <img src="assets/i/3.jpg" class="align-self-center mt-5" width="200" height="200" style="border-radius: 50%; object-fit:cover; ">
+                <div class="card-body p-0">
+                    <h5 class="card-title m-2 text-center">ОТзыв 1</h5>
+                    <p class="card-text m-2 text-center">кий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum </p>
+                </div>
+                <a href="#" class="btn btn-primary m-3">Прочесть целиком</a>
+            </div>
+            <div class="card p-3 my-3 bg-light border-dark">
+                <img src="assets/i/3.jpg" class="align-self-center mt-5" width="200" height="200" style="border-radius: 50%; object-fit:cover; ">
+                <div class="card-body p-0">
+                    <h5 class="card-title m-2 text-center">ОТзыв 1</h5>
+                    <p class="card-text m-2 text-center">Короткий отзыв Lorem ipsum КороКороткий отзыв Lorem ыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum </p>
+                </div>
+                <a href="#" class="btn btn-primary m-3">Прочесть целиком</a>
+            </div>
+            <div class="card p-3 my-3 bg-light border-dark">
+                <img src="assets/i/3.jpg" class="align-self-center mt-5" width="200" height="200" style="border-radius: 50%; object-fit:cover; ">
+                <div class="card-body p-0">
+                    <h5 class="card-title m-2 text-center">ОТзыв 1</h5>
+                    <p class="card-text m-2 text-center">Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum </p>
+                </div>
+                <a href="#" class="btn btn-primary m-3">Прочесть целиком</a>
+            </div>
+            <div class="card p-3 my-3 bg-light border-dark">
+                <img src="assets/i/3.jpg" class="align-self-center mt-5" width="200" height="200" style="border-radius: 50%; object-fit:cover; ">
+                <div class="card-body p-0">
+                    <h5 class="card-title m-2 text-center">ОТзыв 1</h5>
+                    <p class="card-text m-2 text-center">кий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum </p>
+                </div>
+                <a href="#" class="btn btn-primary m-3">Прочесть целиком</a>
+            </div>
+            <div class="card p-3 my-3 bg-light border-dark">
+                <img src="assets/i/3.jpg" class="align-self-center mt-5" width="200" height="200" style="border-radius: 50%; object-fit:cover; ">
+                <div class="card-body p-0">
+                    <h5 class="card-title m-2 text-center">ОТзыв 1</h5>
+                    <p class="card-text m-2 text-center">Короткий отзыв Lorem ipsum КороКороткий отзыв Lorem ыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum </p>
+                </div>
+                <a href="#" class="btn btn-primary m-3">Прочесть целиком</a>
+            </div>
+            <div class="card p-3 my-3 bg-light border-dark">
+                <img src="assets/i/3.jpg" class="align-self-center mt-5" width="200" height="200" style="border-radius: 50%; object-fit:cover; ">
+                <div class="card-body p-0">
+                    <h5 class="card-title m-2 text-center">ОТзыв 1</h5>
+                    <p class="card-text m-2 text-center">Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum </p>
+                </div>
+                <a href="#" class="btn btn-primary m-3">Прочесть целиком</a>
+            </div>
+            <div class="card p-3 my-3 bg-light border-dark">
+                <img src="assets/i/3.jpg" class="align-self-center mt-5" width="200" height="200" style="border-radius: 50%; object-fit:cover; ">
+                <div class="card-body p-0">
+                    <h5 class="card-title m-2 text-center">ОТзыв 1</h5>
+                    <p class="card-text m-2 text-center">кий отзыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum </p>
+                </div>
+                <a href="#" class="btn btn-primary m-3">Прочесть целиком</a>
+            </div>
+            <div class="card p-3 my-3 bg-light border-dark">
+                <img src="assets/i/3.jpg" class="align-self-center mt-5" width="200" height="200" style="border-radius: 50%; object-fit:cover; ">
+                <div class="card-body p-0">
+                    <h5 class="card-title m-2 text-center">ОТзыв 1</h5>
+                    <p class="card-text m-2 text-center">Короткий отзыв Lorem ipsum КороКороткий отзыв Lorem ыв Lorem ipsum Короткий отзыв Lorem ipsum Короткий отзыв Lorem ipsum </p>
+                </div>
+                <a href="#" class="btn btn-primary m-3">Прочесть целиком</a>
+            </div>
+        </div>
+    </div>
 
-</div>
 <div class="footer text-center pt-3 pb-3" style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif">
     <div class="container-fluid">
         <div class="row" >
