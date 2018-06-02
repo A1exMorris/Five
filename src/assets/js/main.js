@@ -10,6 +10,13 @@
 //= ../../../bower_components/bootstrap/js/dist/dropdown.js
 //= ../../../bower_components/clamp-js/clamp.js
 //= ../../../bower_components/fancyBox/dist/jquery.fancybox.js
+//= ../../../bower_components/jquery.stellar/jquery.stellar.js
+//= ../../../bower_components/jquery.easing.gsgd/jquery.easing.js
+
+//= ../../../bower_components/waypoints/lib/jquery.waypoints.js
+
+
+
 
 //= custom/tooltips.js
 //= custom/popover.js

@@ -19,6 +19,9 @@
       "clamp-js":"",
     "fancyBox":"",
     "datatables.net":"",
-    "datatables.net-dt":""
+    "datatables.net-dt":"",
+    "jquery.stellar": "",
+    "waypoints": "",
+    "jquery.easing.gsgd": "1.4.1"
   }
 }

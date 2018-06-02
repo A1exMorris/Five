@@ -19,7 +19,7 @@
 
 </head>
 
-<body>
+<body style="height: 100%; padding-top: 92px; " >
 <nav class="navbar navbar-expand-md navbar-dark bg-secondary fixed-top h4" style="font-family: cheltenham">
 
     <a class="navbar-brand h1" href="index.php"><img src="assets/i/logo2.png" width="60" height="60" class="d-inline-block align-top" style="opacity: 0.5" alt="">  </a> <a style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif; opacity: 0.5" href="index.php">NPhotography</a>
@@ -50,11 +50,29 @@
 </nav>
 <!--Navbar-->
 
-<div class="row jumbotron paral paralsec2 m-0" id="mainSlider">
 
-
+<div class="navigation">
+    <li data-slide="1" class="active">Slide1</li>
+    <li data-slide="2" >Slide2</li>
+    <li data-slide="3" >Slide3</li>
 </div>
-<div class="footer text-center pt-3 pb-3" style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif">
+
+<div class="envatologo">222</div>
+
+
+<div class="slide" id="slide1" data-slide="1" data-stellar-background-ratio="0.5">
+    <span class="slideno">Slide 1</span>
+    <a class="button" data-slide="2" title=""></a>
+</div><!--End Slide 1-->
+<div class="slide" id="slide2" data-slide="2" data-stellar-background-ratio="1">
+    <span class="slideno">Slide 2</span>
+    <a class="button" data-slide="3" title=""></a>
+</div><!--End Slide 2-->
+<div class="slide" id="slide3" data-slide="3" data-stellar-background-ratio="2">
+    <span class="slideno">Slide 3</span>
+    <a class="button" data-slide="1" title=""></a>
+</div><!--End Slide 2-->
+    <div class="footer text-center pt-3 pb-3" style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif">
     <div class="container-fluid">
         <div class="row" >
             <div class="col-3 my-auto">
@@ -95,8 +113,85 @@
         </div>
     </div>
 </div>
+
 <!--Footer-->
 <script src="assets/js/main.js"></script>
+<script>
+    $(document).ready(function() {
 
+
+        //initialise Stellar.js
+        $(window).stellar();
+
+        //Cache some variables
+        var links = $('.navigation').find('li');
+        slide = $('.slide');
+        button = $('.button');
+        mywindow = $(window);
+        htmlbody = $('html,body');
+
+
+        //Setup waypoints plugin
+        slide.waypoint(function (event, direction) {
+
+            var dataslide = $(this.element).attr("data-slide");
+            //cache the variable of the data-slide attribute associated with each slide
+
+
+            //If the user scrolls up change the navigation link that has the same data-slide attribute as the slide to active and
+            //remove the active class from the previous navigation link
+            if (event === 'down') {
+                $('.navigation li[data-slide="' + dataslide + '"]').addClass('active').prev().removeClass('active');
+            }
+            // else If the user scrolls down change the navigation link that has the same data-slide attribute as the slide to active and
+            //remove the active class from the next navigation link
+            else {
+                var tempdataslide = (dataslide - 1);
+                $('.navigation li[data-slide="' + tempdataslide + '"]').addClass('active').next().removeClass('active');
+            }
+
+        },
+            {
+                offset:'92px'
+            }
+        );
+
+        //waypoints doesnt detect the first slide when user scrolls back up to the top so we add this little bit of code, that removes the class
+        //from navigation link slide 2 and adds it to navigation link slide 1.
+        mywindow.scroll(function () {
+            if (mywindow.scrollTop() == 0) {
+                $('.navigation li[data-slide="1"]').addClass('active');
+                $('.navigation li[data-slide="2"]').removeClass('active');
+            }
+        });
+
+        //Create a function that will be passed a slide number and then will scroll to that slide using jquerys animate. The Jquery
+        //easing plugin is also used, so we passed in the easing method of 'easeInOutQuint' which is available throught the plugin.
+        function goToByScroll(dataslide) {
+            htmlbody.animate({
+                scrollTop: $('.slide[data-slide="' + dataslide + '"]').offset().top
+            }, 2000, 'easeInOutQuint');
+        }
+
+
+
+        //When the user clicks on the navigation links, get the data-slide attribute value of the link and pass that variable to the goToByScroll function
+        links.click(function (e) {
+            e.preventDefault();
+            dataslide = $(this).attr('data-slide');
+            goToByScroll(dataslide);
+        });
+
+        //When the user clicks on the button, get the get the data-slide attribute value of the button and pass that variable to the goToByScroll function
+        button.click(function (e) {
+            e.preventDefault();
+            dataslide = $(this).attr('data-slide');
+            goToByScroll(dataslide);
+
+        });
+
+    });
+
+</script>
 </body>
 </html>
