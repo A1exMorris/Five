@@ -150,7 +150,7 @@
     </div>
     </div><!--Footer-->
     <!--Script section-->
-    <script src="assets/js/main.js"></script>
+<!--    <script src="assets/js/main.js"></script>-->
   <!--<script>
 
       $(document).ready(function() {

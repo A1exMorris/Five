@@ -19,7 +19,7 @@
 
 </head>
 
-<body style="height: 100%; padding-top: 92px; " >
+<body style="height: 100%;" >
 <nav class="navbar navbar-expand-md navbar-dark bg-secondary fixed-top h4" style="font-family: cheltenham">
 
     <a class="navbar-brand h1" href="index.php"><img src="assets/i/logo2.png" width="60" height="60" class="d-inline-block align-top" style="opacity: 0.5" alt="">  </a> <a style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif; opacity: 0.5" href="index.php">NPhotography</a>
@@ -49,30 +49,59 @@
     </div>
 </nav>
 <!--Navbar-->
+<!---->
+<!---->
+<!--<div class="navigation">-->
+<!--    <li data-slide="1" class="active">Slide1</li>-->
+<!--    <li data-slide="2" >Slide2</li>-->
+<!--    <li data-slide="3" >Slide3</li>-->
+<!--</div>-->
 
+<!--<div class="envatologo">222</div>-->
 
-<div class="navigation">
-    <li data-slide="1" class="active">Slide1</li>
-    <li data-slide="2" >Slide2</li>
-    <li data-slide="3" >Slide3</li>
-</div>
-
-<div class="envatologo">222</div>
-
-
-<div class="slide" id="slide1" data-slide="1" data-stellar-background-ratio="0.5">
-    <span class="slideno">Slide 1</span>
-    <a class="button" data-slide="2" title=""></a>
+<div style="height:90%; z-index: -3;"></div>
+<div class="slide " id="slide1" data-slide="1" data-stellar-ratio="1" style="z-index: 1; position: fixed; top:0;">
+ <div class="row m-0 h-25 bg-white"></div>
+ <div class="row m-0 h-50 bg-gray-light">
+     <div class="col-12 my-auto text-center"> Индивидуальная фотосъемка </div>
+ </div>
+ <div class="row m-0 h-25 bg-white"></div>
 </div><!--End Slide 1-->
-<div class="slide" id="slide2" data-slide="2" data-stellar-background-ratio="1">
-    <span class="slideno">Slide 2</span>
-    <a class="button" data-slide="3" title=""></a>
+
+<div class="scroller_anchor"></div>
+<div class="slide scroller" id="slide2" data-slide="2" data-stellar-ratio="1" style="z-index: 2;">
+    <div class="row m-0 h-25 bg-transparent"></div>
+    <div class="row m-0 h-50 bg-primary">
+        <div class="col-12 my-auto text-center"> Love story, друзья </div>
+    </div>
+    <div class="row m-0 h-25 bg-transparent"></div>
 </div><!--End Slide 2-->
-<div class="slide" id="slide3" data-slide="3" data-stellar-background-ratio="2">
-    <span class="slideno">Slide 3</span>
-    <a class="button" data-slide="1" title=""></a>
-</div><!--End Slide 2-->
-    <div class="footer text-center pt-3 pb-3" style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif">
+<div class="scroller_anchor1"></div>
+<div class="slide scroller1" id="slide3" data-slide="3" data-stellar-ratio="1" style="z-index: 3">
+    <div class="row m-0 h-25  bg-transparent"></div>
+    <div class="row m-0 h-50 bg-info">
+        <div class="col-12 my-auto text-center"> Семейная съемка </div>
+    </div>
+    <div class="row m-0 h-25  bg-transparent"></div>
+</div><!--End Slide 3-->
+<div class="scroller_anchor2"></div>
+<div class="slide scroller2" id="slide3" data-slide="3" data-stellar-ratio="1" style="z-index: 3">
+    <div class="row m-0 h-25  bg-transparent"></div>
+    <div class="row m-0 h-50 bg-warning">
+        <div class="col-12 my-auto text-center"> Подарочный сертификат </div>
+    </div>
+    <div class="row m-0 h-25  bg-transparent"></div>
+</div><!--End Slide 4-->
+<div class="scroller_anchor3"></div>
+<div class="slide scroller3" id="slide3" data-slide="3" data-stellar-ratio="1" style="z-index: 3">
+    <div class="row m-0 h-25  bg-transparent"></div>
+    <div class="row m-0 h-50 bg-success text-center align-self-center">
+        <div class="col-12 my-auto"> Дополнительные услуги</div>
+    </div>
+    <div class="row m-0 h-25  bg-transparent"></div>
+</div><!--End Slide 5-->
+
+    <div class="footer text-center pt-3 pb-3"  style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif">
     <div class="container-fluid">
         <div class="row" >
             <div class="col-3 my-auto">
@@ -115,13 +144,125 @@
 </div>
 
 <!--Footer-->
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.min.js"></script>
 <script>
     $(document).ready(function() {
 
 
-        //initialise Stellar.js
-        $(window).stellar();
+        $(window).scroll(function(e) {
+            // Get the position of the location where the scroller starts.
+            var scroller_anchor = $(".scroller_anchor").offset().top;
+
+            // Check if the user has scrolled and the current position is after the scroller start location and if its not already fixed at the top
+            if ($(this).scrollTop() > scroller_anchor && $('.scroller').css('position') != 'fixed')
+            {    // Change the CSS of the scroller to hilight it and fix it at the top of the screen.
+                $('.scroller').css({
+                    'position': 'fixed',
+                    'top': '0px',
+                    'z-index': '-1'
+                });
+                $('#slide1').css({'z-index':'-2'});
+                $('#slide2').css({'z-index':'-1'});
+                // Changing the height of the scroller anchor to that of scroller so that there is no change in the overall height of the page.
+                $('.scroller_anchor').css('height', '90%');
+            }
+            else if ($(this).scrollTop() < scroller_anchor && $('.scroller').css('position') != 'relative')
+            {    // If the user has scrolled back to the location above the scroller anchor place it back into the content.
+
+                // Change the height of the scroller anchor to 0 and now we will be adding the scroller back to the content.
+                $('.scroller_anchor').css('height', '0px');
+                $('#slide1').css({'z-index':'1'});
+                $('#slide2').css({'z-index':'2'});
+                // Change the CSS and put it back to its original position.
+                $('.scroller').css({
+                    'position': 'relative'
+                });
+            }
+        });
+        $(window).scroll(function(e) {
+            // Get the position of the location where the scroller starts.
+            var scroller_anchor = $(".scroller_anchor1").offset().top;
+
+            // Check if the user has scrolled and the current position is after the scroller start location and if its not already fixed at the top
+            if ($(this).scrollTop() > scroller_anchor && $('.scroller1').css('position') != 'fixed')
+            {    // Change the CSS of the scroller to hilight it and fix it at the top of the screen.
+                $('.scroller1').css({
+                    'position': 'fixed',
+                    'top': '0px',
+                    'z-index': '-1'
+                });
+
+                // Changing the height of the scroller anchor to that of scroller so that there is no change in the overall height of the page.
+                $('.scroller_anchor1').css('height', '90%');
+            }
+            else if ($(this).scrollTop() < scroller_anchor && $('.scroller1').css('position') != 'relative')
+            {    // If the user has scrolled back to the location above the scroller anchor place it back into the content.
+
+                // Change the height of the scroller anchor to 0 and now we will be adding the scroller back to the content.
+                $('.scroller_anchor1').css('height', '0px');
+
+                // Change the CSS and put it back to its original position.
+                $('.scroller1').css({
+                    'position': 'relative'
+                });
+            }
+        });
+        $(window).scroll(function(e) {
+            // Get the position of the location where the scroller starts.
+            var scroller_anchor = $(".scroller_anchor2").offset().top;
+
+            // Check if the user has scrolled and the current position is after the scroller start location and if its not already fixed at the top
+            if ($(this).scrollTop() > scroller_anchor && $('.scroller2').css('position') != 'fixed')
+            {    // Change the CSS of the scroller to hilight it and fix it at the top of the screen.
+                $('.scroller2').css({
+                    'position': 'fixed',
+                    'top': '0px',
+                    'z-index': '-1'
+                });
+
+                // Changing the height of the scroller anchor to that of scroller so that there is no change in the overall height of the page.
+                $('.scroller_anchor2').css('height', '90%');
+            }
+            else if ($(this).scrollTop() < scroller_anchor && $('.scroller2').css('position') != 'relative')
+            {    // If the user has scrolled back to the location above the scroller anchor place it back into the content.
+
+                // Change the height of the scroller anchor to 0 and now we will be adding the scroller back to the content.
+                $('.scroller_anchor2').css('height', '0px');
+
+                // Change the CSS and put it back to its original position.
+                $('.scroller2').css({
+                    'position': 'relative'
+                });
+            }
+        });
+        $(window).scroll(function(e) {
+            // Get the position of the location where the scroller starts.
+            var scroller_anchor = $(".scroller_anchor3").offset().top;
+
+            // Check if the user has scrolled and the current position is after the scroller start location and if its not already fixed at the top
+            if ($(this).scrollTop() > scroller_anchor && $('.scroller3').css('position') != 'fixed')
+            {    // Change the CSS of the scroller to hilight it and fix it at the top of the screen.
+                $('.scroller3').css({
+                    'position': 'fixed',
+                    'top': '0px',
+                    'z-index': '-1'
+                });
+
+                // Changing the height of the scroller anchor to that of scroller so that there is no change in the overall height of the page.
+                $('.scroller_anchor3').css('height', '90%');
+            }
+            else if ($(this).scrollTop() < scroller_anchor && $('.scroller3').css('position') != 'relative')
+            {    // If the user has scrolled back to the location above the scroller anchor place it back into the content.
+
+                // Change the height of the scroller anchor to 0 and now we will be adding the scroller back to the content.
+                $('.scroller_anchor3').css('height', '0px');
+
+                // Change the CSS and put it back to its original position.
+                $('.scroller3').css({
+                    'position': 'relative'
+                });
+            }
+        });
 
         //Cache some variables
         var links = $('.navigation').find('li');
@@ -142,6 +283,7 @@
             //remove the active class from the previous navigation link
             if (event === 'down') {
                 $('.navigation li[data-slide="' + dataslide + '"]').addClass('active').prev().removeClass('active');
+
             }
             // else If the user scrolls down change the navigation link that has the same data-slide attribute as the slide to active and
             //remove the active class from the next navigation link
@@ -151,9 +293,7 @@
             }
 
         },
-            {
-                offset:'92px'
-            }
+
         );
 
         //waypoints doesnt detect the first slide when user scrolls back up to the top so we add this little bit of code, that removes the class

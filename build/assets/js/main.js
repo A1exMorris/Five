@@ -15624,16 +15624,9 @@ var Dropdown = function ($) {
 
     window.$clamp = clamp;
 })();
-// ==================================================
-// fancyBox v3.3.5
-//
-// Licensed GPLv3 for open source use
-// or fancyBox Commercial License for commercial use
-//
-// http://fancyapps.com/fancybox/
-// Copyright 2018 fancyApps
-//
-// ==================================================
+
+
+
 (function(window, document, $, undefined) {
   "use strict";
 
@@ -18371,7 +18364,7 @@ var Dropdown = function ($) {
   });
 
   $.fancybox = {
-    version: "3.3.5",
+    version: "{fancybox-version}",
     defaults: defaults,
 
     // Get current instance and execute a command.
@@ -18698,209 +18691,175 @@ var Dropdown = function ($) {
     });
   });
 })(window, document, window.jQuery || jQuery);
-
 // ==========================================================================
 //
-// Media
-// Adds additional media type support
+// FullScreen
+// Adds fullscreen functionality
 //
 // ==========================================================================
-(function($) {
+(function(document, $) {
   "use strict";
 
-  // Formats matching url to final form
+  // Collection of methods supported by user browser
+  var fn = (function() {
+    var fnMap = [
+      ["requestFullscreen", "exitFullscreen", "fullscreenElement", "fullscreenEnabled", "fullscreenchange", "fullscreenerror"],
+      // new WebKit
+      [
+        "webkitRequestFullscreen",
+        "webkitExitFullscreen",
+        "webkitFullscreenElement",
+        "webkitFullscreenEnabled",
+        "webkitfullscreenchange",
+        "webkitfullscreenerror"
+      ],
+      // old WebKit (Safari 5.1)
+      [
+        "webkitRequestFullScreen",
+        "webkitCancelFullScreen",
+        "webkitCurrentFullScreenElement",
+        "webkitCancelFullScreen",
+        "webkitfullscreenchange",
+        "webkitfullscreenerror"
+      ],
+      [
+        "mozRequestFullScreen",
+        "mozCancelFullScreen",
+        "mozFullScreenElement",
+        "mozFullScreenEnabled",
+        "mozfullscreenchange",
+        "mozfullscreenerror"
+      ],
+      ["msRequestFullscreen", "msExitFullscreen", "msFullscreenElement", "msFullscreenEnabled", "MSFullscreenChange", "MSFullscreenError"]
+    ];
 
-  var format = function(url, rez, params) {
-    if (!url) {
-      return;
+    var ret = {};
+
+    for (var i = 0; i < fnMap.length; i++) {
+      var val = fnMap[i];
+
+      if (val && val[1] in document) {
+        for (var j = 0; j < val.length; j++) {
+          ret[fnMap[0][j]] = val[j];
+        }
+
+        return ret;
+      }
     }
 
-    params = params || "";
+    return false;
+  })();
 
-    if ($.type(params) === "object") {
-      params = $.param(params, true);
+  // If browser does not have Full Screen API, then simply unset default button template and stop
+  if (!fn) {
+    if ($ && $.fancybox) {
+      $.fancybox.defaults.btnTpl.fullScreen = false;
     }
 
-    $.each(rez, function(key, value) {
-      url = url.replace("$" + key, value || "");
-    });
+    return;
+  }
 
-    if (params.length) {
-      url += (url.indexOf("?") > 0 ? "&" : "?") + params;
-    }
+  var FullScreen = {
+    request: function(elem) {
+      elem = elem || document.documentElement;
 
-    return url;
-  };
-
-  // Object containing properties for each media type
-
-  var defaults = {
-    youtube: {
-      matcher: /(youtube\.com|youtu\.be|youtube\-nocookie\.com)\/(watch\?(.*&)?v=|v\/|u\/|embed\/?)?(videoseries\?list=(.*)|[\w-]{11}|\?listType=(.*)&list=(.*))(.*)/i,
-      params: {
-        autoplay: 1,
-        autohide: 1,
-        fs: 1,
-        rel: 0,
-        hd: 1,
-        wmode: "transparent",
-        enablejsapi: 1,
-        html5: 1
-      },
-      paramPlace: 8,
-      type: "iframe",
-      url: "//www.youtube.com/embed/$4",
-      thumb: "//img.youtube.com/vi/$4/hqdefault.jpg"
+      elem[fn.requestFullscreen](elem.ALLOW_KEYBOARD_INPUT);
     },
-
-    vimeo: {
-      matcher: /^.+vimeo.com\/(.*\/)?([\d]+)(.*)?/,
-      params: {
-        autoplay: 1,
-        hd: 1,
-        show_title: 1,
-        show_byline: 1,
-        show_portrait: 0,
-        fullscreen: 1,
-        api: 1
-      },
-      paramPlace: 3,
-      type: "iframe",
-      url: "//player.vimeo.com/video/$2"
+    exit: function() {
+      document[fn.exitFullscreen]();
     },
+    toggle: function(elem) {
+      elem = elem || document.documentElement;
 
-    instagram: {
-      matcher: /(instagr\.am|instagram\.com)\/p\/([a-zA-Z0-9_\-]+)\/?/i,
-      type: "image",
-      url: "//$1/p/$2/media/?size=l"
-    },
-
-    // Examples:
-    // http://maps.google.com/?ll=48.857995,2.294297&spn=0.007666,0.021136&t=m&z=16
-    // https://www.google.com/maps/@37.7852006,-122.4146355,14.65z
-    // https://www.google.com/maps/@52.2111123,2.9237542,6.61z?hl=en
-    // https://www.google.com/maps/place/Googleplex/@37.4220041,-122.0833494,17z/data=!4m5!3m4!1s0x0:0x6c296c66619367e0!8m2!3d37.4219998!4d-122.0840572
-    gmap_place: {
-      matcher: /(maps\.)?google\.([a-z]{2,3}(\.[a-z]{2})?)\/(((maps\/(place\/(.*)\/)?\@(.*),(\d+.?\d+?)z))|(\?ll=))(.*)?/i,
-      type: "iframe",
-      url: function(rez) {
-        return (
-          "//maps.google." +
-          rez[2] +
-          "/?ll=" +
-          (rez[9] ? rez[9] + "&z=" + Math.floor(rez[10]) + (rez[12] ? rez[12].replace(/^\//, "&") : "") : rez[12] + "").replace(/\?/, "&") +
-          "&output=" +
-          (rez[12] && rez[12].indexOf("layer=c") > 0 ? "svembed" : "embed")
-        );
+      if (this.isFullscreen()) {
+        this.exit();
+      } else {
+        this.request(elem);
       }
     },
-
-    // Examples:
-    // https://www.google.com/maps/search/Empire+State+Building/
-    // https://www.google.com/maps/search/?api=1&query=centurylink+field
-    // https://www.google.com/maps/search/?api=1&query=47.5951518,-122.3316393
-    gmap_search: {
-      matcher: /(maps\.)?google\.([a-z]{2,3}(\.[a-z]{2})?)\/(maps\/search\/)(.*)/i,
-      type: "iframe",
-      url: function(rez) {
-        return "//maps.google." + rez[2] + "/maps?q=" + rez[5].replace("query=", "q=").replace("api=1", "") + "&output=embed";
-      }
+    isFullscreen: function() {
+      return Boolean(document[fn.fullscreenElement]);
+    },
+    enabled: function() {
+      return Boolean(document[fn.fullscreenEnabled]);
     }
   };
 
-  $(document).on("objectNeedsType.fb", function(e, instance, item) {
-    var url = item.src || "",
-      type = false,
-      media,
-      thumb,
-      rez,
-      params,
-      urlParams,
-      paramObj,
-      provider;
-
-    media = $.extend(true, {}, defaults, item.opts.media);
-
-    // Look for any matching media type
-    $.each(media, function(providerName, providerOpts) {
-      rez = url.match(providerOpts.matcher);
-
-      if (!rez) {
-        return;
-      }
-
-      type = providerOpts.type;
-      provider = providerName;
-      paramObj = {};
-
-      if (providerOpts.paramPlace && rez[providerOpts.paramPlace]) {
-        urlParams = rez[providerOpts.paramPlace];
-
-        if (urlParams[0] == "?") {
-          urlParams = urlParams.substring(1);
-        }
-
-        urlParams = urlParams.split("&");
-
-        for (var m = 0; m < urlParams.length; ++m) {
-          var p = urlParams[m].split("=", 2);
-
-          if (p.length == 2) {
-            paramObj[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-          }
-        }
-      }
-
-      params = $.extend(true, {}, providerOpts.params, item.opts[providerName], paramObj);
-
-      url =
-        $.type(providerOpts.url) === "function" ? providerOpts.url.call(this, rez, params, item) : format(providerOpts.url, rez, params);
-
-      thumb =
-        $.type(providerOpts.thumb) === "function" ? providerOpts.thumb.call(this, rez, params, item) : format(providerOpts.thumb, rez);
-
-      if (providerName === "youtube") {
-        url = url.replace(/&t=((\d+)m)?(\d+)s/, function(match, p1, m, s) {
-          return "&start=" + ((m ? parseInt(m, 10) * 60 : 0) + parseInt(s, 10));
-        });
-      } else if (providerName === "vimeo") {
-        url = url.replace("&%23", "#");
-      }
-
-      return false;
-    });
-
-    // If it is found, then change content type and update the url
-
-    if (type) {
-      if (!item.opts.thumb && !(item.opts.$thumb && item.opts.$thumb.length)) {
-        item.opts.thumb = thumb;
-      }
-
-      if (type === "iframe") {
-        item.opts = $.extend(true, item.opts, {
-          iframe: {
-            preload: false,
-            attr: {
-              scrolling: "no"
-            }
-          }
-        });
-      }
-
-      $.extend(item, {
-        type: type,
-        src: url,
-        origSrc: item.src,
-        contentSource: provider,
-        contentType: type === "image" ? "image" : provider == "gmap_place" || provider == "gmap_search" ? "map" : "video"
-      });
-    } else if (url) {
-      item.type = item.opts.defaultType;
+  $.extend(true, $.fancybox.defaults, {
+    btnTpl: {
+      fullScreen:
+        '<button data-fancybox-fullscreen class="fancybox-button fancybox-button--fullscreen" title="{{FULL_SCREEN}}">' +
+        '<svg viewBox="0 0 40 40">' +
+        '<path d="M9,12 v16 h22 v-16 h-22 v8" />' +
+        "</svg>" +
+        "</button>"
+    },
+    fullScreen: {
+      autoStart: false
     }
   });
-})(window.jQuery || jQuery);
 
+  $(document).on({
+    "onInit.fb": function(e, instance) {
+      var $container;
+
+      if (instance && instance.group[instance.currIndex].opts.fullScreen) {
+        $container = instance.$refs.container;
+
+        $container.on("click.fb-fullscreen", "[data-fancybox-fullscreen]", function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+
+          FullScreen.toggle();
+        });
+
+        if (instance.opts.fullScreen && instance.opts.fullScreen.autoStart === true) {
+          FullScreen.request();
+        }
+
+        // Expose API
+        instance.FullScreen = FullScreen;
+      } else if (instance) {
+        instance.$refs.toolbar.find("[data-fancybox-fullscreen]").hide();
+      }
+    },
+
+    "afterKeydown.fb": function(e, instance, current, keypress, keycode) {
+      // "F"
+      if (instance && instance.FullScreen && keycode === 70) {
+        keypress.preventDefault();
+
+        instance.FullScreen.toggle();
+      }
+    },
+
+    "beforeClose.fb": function(e, instance) {
+      if (instance && instance.FullScreen && instance.$refs.container.hasClass("fancybox-is-fullscreen")) {
+        FullScreen.exit();
+      }
+    }
+  });
+
+  $(document).on(fn.fullscreenchange, function() {
+    var isFullscreen = FullScreen.isFullscreen(),
+      instance = $.fancybox.getInstance();
+
+    if (instance) {
+      // If image is zooming, then force to stop and reposition properly
+      if (instance.current && instance.current.type === "image" && instance.isAnimating) {
+        instance.current.$content.css("transition", "none");
+
+        instance.isAnimating = false;
+
+        instance.update(true, true, 0);
+      }
+
+      instance.trigger("onFullscreenChange", isFullscreen);
+
+      instance.$refs.container.toggleClass("fancybox-is-fullscreen", isFullscreen);
+    }
+  });
+})(document, window.jQuery || jQuery);
 // ==========================================================================
 //
 // Guestures
@@ -19786,7 +19745,527 @@ var Dropdown = function ($) {
     }
   });
 })(window, document, window.jQuery || jQuery);
+// ==========================================================================
+//
+// Hash
+// Enables linking to each modal
+//
+// ==========================================================================
+(function(document, window, $) {
+  "use strict";
 
+  // Simple $.escapeSelector polyfill (for jQuery prior v3)
+  if (!$.escapeSelector) {
+    $.escapeSelector = function(sel) {
+      var rcssescape = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\x80-\uFFFF\w-]/g;
+      var fcssescape = function(ch, asCodePoint) {
+        if (asCodePoint) {
+          // U+0000 NULL becomes U+FFFD REPLACEMENT CHARACTER
+          if (ch === "\0") {
+            return "\uFFFD";
+          }
+
+          // Control characters and (dependent upon position) numbers get escaped as code points
+          return ch.slice(0, -1) + "\\" + ch.charCodeAt(ch.length - 1).toString(16) + " ";
+        }
+
+        // Other potentially-special ASCII characters get backslash-escaped
+        return "\\" + ch;
+      };
+
+      return (sel + "").replace(rcssescape, fcssescape);
+    };
+  }
+
+  // Get info about gallery name and current index from url
+  function parseUrl() {
+    var hash = window.location.hash.substr(1),
+      rez = hash.split("-"),
+      index = rez.length > 1 && /^\+?\d+$/.test(rez[rez.length - 1]) ? parseInt(rez.pop(-1), 10) || 1 : 1,
+      gallery = rez.join("-");
+
+    return {
+      hash: hash,
+      /* Index is starting from 1 */
+      index: index < 1 ? 1 : index,
+      gallery: gallery
+    };
+  }
+
+  // Trigger click evnt on links to open new fancyBox instance
+  function triggerFromUrl(url) {
+    var $el;
+
+    if (url.gallery !== "") {
+      // If we can find element matching 'data-fancybox' atribute, then trigger click event for that.
+      // It should start fancyBox
+      $el = $("[data-fancybox='" + $.escapeSelector(url.gallery) + "']")
+        .eq(url.index - 1)
+        .trigger("click.fb-start");
+    }
+  }
+
+  // Get gallery name from current instance
+  function getGalleryID(instance) {
+    var opts, ret;
+
+    if (!instance) {
+      return false;
+    }
+
+    opts = instance.current ? instance.current.opts : instance.opts;
+    ret = opts.hash || (opts.$orig ? opts.$orig.data("fancybox") : "");
+
+    return ret === "" ? false : ret;
+  }
+
+  // Start when DOM becomes ready
+  $(function() {
+    // Check if user has disabled this module
+    if ($.fancybox.defaults.hash === false) {
+      return;
+    }
+
+    // Update hash when opening/closing fancyBox
+    $(document).on({
+      "onInit.fb": function(e, instance) {
+        var url, gallery;
+
+        if (instance.group[instance.currIndex].opts.hash === false) {
+          return;
+        }
+
+        url = parseUrl();
+        gallery = getGalleryID(instance);
+
+        // Make sure gallery start index matches index from hash
+        if (gallery && url.gallery && gallery == url.gallery) {
+          instance.currIndex = url.index - 1;
+        }
+      },
+
+      "beforeShow.fb": function(e, instance, current, firstRun) {
+        var gallery;
+
+        if (!current || current.opts.hash === false) {
+          return;
+        }
+
+        // Check if need to update window hash
+        gallery = getGalleryID(instance);
+
+        if (!gallery) {
+          return;
+        }
+
+        // Variable containing last hash value set by fancyBox
+        // It will be used to determine if fancyBox needs to close after hash change is detected
+        instance.currentHash = gallery + (instance.group.length > 1 ? "-" + (current.index + 1) : "");
+
+        // If current hash is the same (this instance most likely is opened by hashchange), then do nothing
+        if (window.location.hash === "#" + instance.currentHash) {
+          return;
+        }
+
+        if (!instance.origHash) {
+          instance.origHash = window.location.hash;
+        }
+
+        if (instance.hashTimer) {
+          clearTimeout(instance.hashTimer);
+        }
+
+        // Update hash
+        instance.hashTimer = setTimeout(function() {
+          if ("replaceState" in window.history) {
+            window.history[firstRun ? "pushState" : "replaceState"](
+              {},
+              document.title,
+              window.location.pathname + window.location.search + "#" + instance.currentHash
+            );
+
+            if (firstRun) {
+              instance.hasCreatedHistory = true;
+            }
+          } else {
+            window.location.hash = instance.currentHash;
+          }
+
+          instance.hashTimer = null;
+        }, 300);
+      },
+
+      "beforeClose.fb": function(e, instance, current) {
+        var gallery;
+
+        if (current.opts.hash === false) {
+          return;
+        }
+
+        gallery = getGalleryID(instance);
+
+        // Goto previous history entry
+        if (instance.currentHash && instance.hasCreatedHistory) {
+          window.history.back();
+        } else if (instance.currentHash) {
+          if ("replaceState" in window.history) {
+            window.history.replaceState({}, document.title, window.location.pathname + window.location.search + (instance.origHash || ""));
+          } else {
+            window.location.hash = instance.origHash;
+          }
+        }
+
+        instance.currentHash = null;
+
+        clearTimeout(instance.hashTimer);
+      }
+    });
+
+    // Check if need to start/close after url has changed
+    $(window).on("hashchange.fb", function() {
+      var url = parseUrl(),
+        fb;
+
+      // Find last fancyBox instance that has "hash"
+      $.each(
+        $(".fancybox-container")
+          .get()
+          .reverse(),
+        function(index, value) {
+          var tmp = $(value).data("FancyBox");
+          //isClosing
+          if (tmp.currentHash) {
+            fb = tmp;
+            return false;
+          }
+        }
+      );
+
+      if (fb) {
+        // Now, compare hash values
+        if (fb.currentHash && fb.currentHash !== url.gallery + "-" + url.index && !(url.index === 1 && fb.currentHash == url.gallery)) {
+          fb.currentHash = null;
+
+          fb.close();
+        }
+      } else if (url.gallery !== "") {
+        triggerFromUrl(url);
+      }
+    });
+
+    // Check current hash and trigger click event on matching element to start fancyBox, if needed
+    setTimeout(function() {
+      if (!$.fancybox.getInstance()) {
+        triggerFromUrl(parseUrl());
+      }
+    }, 50);
+  });
+})(document, window, window.jQuery || jQuery);
+// ==========================================================================
+//
+// Media
+// Adds additional media type support
+//
+// ==========================================================================
+(function($) {
+  "use strict";
+
+  // Formats matching url to final form
+
+  var format = function(url, rez, params) {
+    if (!url) {
+      return;
+    }
+
+    params = params || "";
+
+    if ($.type(params) === "object") {
+      params = $.param(params, true);
+    }
+
+    $.each(rez, function(key, value) {
+      url = url.replace("$" + key, value || "");
+    });
+
+    if (params.length) {
+      url += (url.indexOf("?") > 0 ? "&" : "?") + params;
+    }
+
+    return url;
+  };
+
+  // Object containing properties for each media type
+
+  var defaults = {
+    youtube: {
+      matcher: /(youtube\.com|youtu\.be|youtube\-nocookie\.com)\/(watch\?(.*&)?v=|v\/|u\/|embed\/?)?(videoseries\?list=(.*)|[\w-]{11}|\?listType=(.*)&list=(.*))(.*)/i,
+      params: {
+        autoplay: 1,
+        autohide: 1,
+        fs: 1,
+        rel: 0,
+        hd: 1,
+        wmode: "transparent",
+        enablejsapi: 1,
+        html5: 1
+      },
+      paramPlace: 8,
+      type: "iframe",
+      url: "//www.youtube.com/embed/$4",
+      thumb: "//img.youtube.com/vi/$4/hqdefault.jpg"
+    },
+
+    vimeo: {
+      matcher: /^.+vimeo.com\/(.*\/)?([\d]+)(.*)?/,
+      params: {
+        autoplay: 1,
+        hd: 1,
+        show_title: 1,
+        show_byline: 1,
+        show_portrait: 0,
+        fullscreen: 1,
+        api: 1
+      },
+      paramPlace: 3,
+      type: "iframe",
+      url: "//player.vimeo.com/video/$2"
+    },
+
+    instagram: {
+      matcher: /(instagr\.am|instagram\.com)\/p\/([a-zA-Z0-9_\-]+)\/?/i,
+      type: "image",
+      url: "//$1/p/$2/media/?size=l"
+    },
+
+    // Examples:
+    // http://maps.google.com/?ll=48.857995,2.294297&spn=0.007666,0.021136&t=m&z=16
+    // https://www.google.com/maps/@37.7852006,-122.4146355,14.65z
+    // https://www.google.com/maps/@52.2111123,2.9237542,6.61z?hl=en
+    // https://www.google.com/maps/place/Googleplex/@37.4220041,-122.0833494,17z/data=!4m5!3m4!1s0x0:0x6c296c66619367e0!8m2!3d37.4219998!4d-122.0840572
+    gmap_place: {
+      matcher: /(maps\.)?google\.([a-z]{2,3}(\.[a-z]{2})?)\/(((maps\/(place\/(.*)\/)?\@(.*),(\d+.?\d+?)z))|(\?ll=))(.*)?/i,
+      type: "iframe",
+      url: function(rez) {
+        return (
+          "//maps.google." +
+          rez[2] +
+          "/?ll=" +
+          (rez[9] ? rez[9] + "&z=" + Math.floor(rez[10]) + (rez[12] ? rez[12].replace(/^\//, "&") : "") : rez[12] + "").replace(/\?/, "&") +
+          "&output=" +
+          (rez[12] && rez[12].indexOf("layer=c") > 0 ? "svembed" : "embed")
+        );
+      }
+    },
+
+    // Examples:
+    // https://www.google.com/maps/search/Empire+State+Building/
+    // https://www.google.com/maps/search/?api=1&query=centurylink+field
+    // https://www.google.com/maps/search/?api=1&query=47.5951518,-122.3316393
+    gmap_search: {
+      matcher: /(maps\.)?google\.([a-z]{2,3}(\.[a-z]{2})?)\/(maps\/search\/)(.*)/i,
+      type: "iframe",
+      url: function(rez) {
+        return "//maps.google." + rez[2] + "/maps?q=" + rez[5].replace("query=", "q=").replace("api=1", "") + "&output=embed";
+      }
+    }
+  };
+
+  $(document).on("objectNeedsType.fb", function(e, instance, item) {
+    var url = item.src || "",
+      type = false,
+      media,
+      thumb,
+      rez,
+      params,
+      urlParams,
+      paramObj,
+      provider;
+
+    media = $.extend(true, {}, defaults, item.opts.media);
+
+    // Look for any matching media type
+    $.each(media, function(providerName, providerOpts) {
+      rez = url.match(providerOpts.matcher);
+
+      if (!rez) {
+        return;
+      }
+
+      type = providerOpts.type;
+      provider = providerName;
+      paramObj = {};
+
+      if (providerOpts.paramPlace && rez[providerOpts.paramPlace]) {
+        urlParams = rez[providerOpts.paramPlace];
+
+        if (urlParams[0] == "?") {
+          urlParams = urlParams.substring(1);
+        }
+
+        urlParams = urlParams.split("&");
+
+        for (var m = 0; m < urlParams.length; ++m) {
+          var p = urlParams[m].split("=", 2);
+
+          if (p.length == 2) {
+            paramObj[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+          }
+        }
+      }
+
+      params = $.extend(true, {}, providerOpts.params, item.opts[providerName], paramObj);
+
+      url =
+        $.type(providerOpts.url) === "function" ? providerOpts.url.call(this, rez, params, item) : format(providerOpts.url, rez, params);
+
+      thumb =
+        $.type(providerOpts.thumb) === "function" ? providerOpts.thumb.call(this, rez, params, item) : format(providerOpts.thumb, rez);
+
+      if (providerName === "youtube") {
+        url = url.replace(/&t=((\d+)m)?(\d+)s/, function(match, p1, m, s) {
+          return "&start=" + ((m ? parseInt(m, 10) * 60 : 0) + parseInt(s, 10));
+        });
+      } else if (providerName === "vimeo") {
+        url = url.replace("&%23", "#");
+      }
+
+      return false;
+    });
+
+    // If it is found, then change content type and update the url
+
+    if (type) {
+      if (!item.opts.thumb && !(item.opts.$thumb && item.opts.$thumb.length)) {
+        item.opts.thumb = thumb;
+      }
+
+      if (type === "iframe") {
+        item.opts = $.extend(true, item.opts, {
+          iframe: {
+            preload: false,
+            attr: {
+              scrolling: "no"
+            }
+          }
+        });
+      }
+
+      $.extend(item, {
+        type: type,
+        src: url,
+        origSrc: item.src,
+        contentSource: provider,
+        contentType: type === "image" ? "image" : provider == "gmap_place" || provider == "gmap_search" ? "map" : "video"
+      });
+    } else if (url) {
+      item.type = item.opts.defaultType;
+    }
+  });
+})(window.jQuery || jQuery);
+//// ==========================================================================
+//
+// Share
+// Displays simple form for sharing current url
+//
+// ==========================================================================
+(function(document, $) {
+  "use strict";
+
+  $.extend(true, $.fancybox.defaults, {
+    btnTpl: {
+      share:
+        '<button data-fancybox-share class="fancybox-button fancybox-button--share" title="{{SHARE}}">' +
+        '<svg viewBox="0 0 40 40">' +
+        '<path d="M6,30 C8,18 19,16 23,16 L23,16 L23,10 L33,20 L23,29 L23,24 C19,24 8,27 6,30 Z">' +
+        "</svg>" +
+        "</button>"
+    },
+    share: {
+      url: function(instance, item) {
+        return (
+          (!instance.currentHash && !(item.type === "inline" || item.type === "html") ? item.origSrc || item.src : false) || window.location
+        );
+      },
+      tpl:
+        '<div class="fancybox-share">' +
+        "<h1>{{SHARE}}</h1>" +
+        "<p>" +
+        '<a class="fancybox-share__button fancybox-share__button--fb" href="https://www.facebook.com/sharer/sharer.php?u={{url}}">' +
+        '<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m287 456v-299c0-21 6-35 35-35h38v-63c-7-1-29-3-55-3-54 0-91 33-91 94v306m143-254h-205v72h196" /></svg>' +
+        "<span>Facebook</span>" +
+        "</a>" +
+        '<a class="fancybox-share__button fancybox-share__button--tw" href="https://twitter.com/intent/tweet?url={{url}}&text={{descr}}">' +
+        '<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m456 133c-14 7-31 11-47 13 17-10 30-27 37-46-15 10-34 16-52 20-61-62-157-7-141 75-68-3-129-35-169-85-22 37-11 86 26 109-13 0-26-4-37-9 0 39 28 72 65 80-12 3-25 4-37 2 10 33 41 57 77 57-42 30-77 38-122 34 170 111 378-32 359-208 16-11 30-25 41-42z" /></svg>' +
+        "<span>Twitter</span>" +
+        "</a>" +
+        '<a class="fancybox-share__button fancybox-share__button--pt" href="https://www.pinterest.com/pin/create/button/?url={{url}}&description={{descr}}&media={{media}}">' +
+        '<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m265 56c-109 0-164 78-164 144 0 39 15 74 47 87 5 2 10 0 12-5l4-19c2-6 1-8-3-13-9-11-15-25-15-45 0-58 43-110 113-110 62 0 96 38 96 88 0 67-30 122-73 122-24 0-42-19-36-44 6-29 20-60 20-81 0-19-10-35-31-35-25 0-44 26-44 60 0 21 7 36 7 36l-30 125c-8 37-1 83 0 87 0 3 4 4 5 2 2-3 32-39 42-75l16-64c8 16 31 29 56 29 74 0 124-67 124-157 0-69-58-132-146-132z" fill="#fff"/></svg>' +
+        "<span>Pinterest</span>" +
+        "</a>" +
+        "</p>" +
+        '<p><input class="fancybox-share__input" type="text" value="{{url_raw}}" /></p>' +
+        "</div>"
+    }
+  });
+
+  function escapeHtml(string) {
+    var entityMap = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+      "/": "&#x2F;",
+      "`": "&#x60;",
+      "=": "&#x3D;"
+    };
+
+    return String(string).replace(/[&<>"'`=\/]/g, function(s) {
+      return entityMap[s];
+    });
+  }
+
+  $(document).on("click", "[data-fancybox-share]", function() {
+    var instance = $.fancybox.getInstance(),
+      current = instance.current || null,
+      url,
+      tpl;
+
+    if (!current) {
+      return;
+    }
+
+    if ($.type(current.opts.share.url) === "function") {
+      url = current.opts.share.url.apply(current, [instance, current]);
+    }
+
+    tpl = current.opts.share.tpl
+      .replace(/\{\{media\}\}/g, current.type === "image" ? encodeURIComponent(current.src) : "")
+      .replace(/\{\{url\}\}/g, encodeURIComponent(url))
+      .replace(/\{\{url_raw\}\}/g, escapeHtml(url))
+      .replace(/\{\{descr\}\}/g, instance.$caption ? encodeURIComponent(instance.$caption.text()) : "");
+
+    $.fancybox.open({
+      src: instance.translate(instance, tpl),
+      type: "html",
+      opts: {
+        animationEffect: false,
+        afterLoad: function(shareInstance, shareCurrent) {
+          // Close self if parent instance is closing
+          instance.$refs.container.one("beforeClose.fb", function() {
+            shareInstance.close(null, 0);
+          });
+
+          // Opening links in a popup window
+          shareCurrent.$content.find(".fancybox-share__links a").click(function() {
+            window.open(this.href, "Share", "width=550, height=450");
+            return false;
+          });
+        }
+      }
+    });
+  });
+})(document, window.jQuery || jQuery);
 // ==========================================================================
 //
 // SlideShow
@@ -19968,177 +20447,6 @@ var Dropdown = function ($) {
     }
   });
 })(document, window.jQuery || jQuery);
-
-// ==========================================================================
-//
-// FullScreen
-// Adds fullscreen functionality
-//
-// ==========================================================================
-(function(document, $) {
-  "use strict";
-
-  // Collection of methods supported by user browser
-  var fn = (function() {
-    var fnMap = [
-      ["requestFullscreen", "exitFullscreen", "fullscreenElement", "fullscreenEnabled", "fullscreenchange", "fullscreenerror"],
-      // new WebKit
-      [
-        "webkitRequestFullscreen",
-        "webkitExitFullscreen",
-        "webkitFullscreenElement",
-        "webkitFullscreenEnabled",
-        "webkitfullscreenchange",
-        "webkitfullscreenerror"
-      ],
-      // old WebKit (Safari 5.1)
-      [
-        "webkitRequestFullScreen",
-        "webkitCancelFullScreen",
-        "webkitCurrentFullScreenElement",
-        "webkitCancelFullScreen",
-        "webkitfullscreenchange",
-        "webkitfullscreenerror"
-      ],
-      [
-        "mozRequestFullScreen",
-        "mozCancelFullScreen",
-        "mozFullScreenElement",
-        "mozFullScreenEnabled",
-        "mozfullscreenchange",
-        "mozfullscreenerror"
-      ],
-      ["msRequestFullscreen", "msExitFullscreen", "msFullscreenElement", "msFullscreenEnabled", "MSFullscreenChange", "MSFullscreenError"]
-    ];
-
-    var ret = {};
-
-    for (var i = 0; i < fnMap.length; i++) {
-      var val = fnMap[i];
-
-      if (val && val[1] in document) {
-        for (var j = 0; j < val.length; j++) {
-          ret[fnMap[0][j]] = val[j];
-        }
-
-        return ret;
-      }
-    }
-
-    return false;
-  })();
-
-  // If browser does not have Full Screen API, then simply unset default button template and stop
-  if (!fn) {
-    if ($ && $.fancybox) {
-      $.fancybox.defaults.btnTpl.fullScreen = false;
-    }
-
-    return;
-  }
-
-  var FullScreen = {
-    request: function(elem) {
-      elem = elem || document.documentElement;
-
-      elem[fn.requestFullscreen](elem.ALLOW_KEYBOARD_INPUT);
-    },
-    exit: function() {
-      document[fn.exitFullscreen]();
-    },
-    toggle: function(elem) {
-      elem = elem || document.documentElement;
-
-      if (this.isFullscreen()) {
-        this.exit();
-      } else {
-        this.request(elem);
-      }
-    },
-    isFullscreen: function() {
-      return Boolean(document[fn.fullscreenElement]);
-    },
-    enabled: function() {
-      return Boolean(document[fn.fullscreenEnabled]);
-    }
-  };
-
-  $.extend(true, $.fancybox.defaults, {
-    btnTpl: {
-      fullScreen:
-        '<button data-fancybox-fullscreen class="fancybox-button fancybox-button--fullscreen" title="{{FULL_SCREEN}}">' +
-        '<svg viewBox="0 0 40 40">' +
-        '<path d="M9,12 v16 h22 v-16 h-22 v8" />' +
-        "</svg>" +
-        "</button>"
-    },
-    fullScreen: {
-      autoStart: false
-    }
-  });
-
-  $(document).on({
-    "onInit.fb": function(e, instance) {
-      var $container;
-
-      if (instance && instance.group[instance.currIndex].opts.fullScreen) {
-        $container = instance.$refs.container;
-
-        $container.on("click.fb-fullscreen", "[data-fancybox-fullscreen]", function(e) {
-          e.stopPropagation();
-          e.preventDefault();
-
-          FullScreen.toggle();
-        });
-
-        if (instance.opts.fullScreen && instance.opts.fullScreen.autoStart === true) {
-          FullScreen.request();
-        }
-
-        // Expose API
-        instance.FullScreen = FullScreen;
-      } else if (instance) {
-        instance.$refs.toolbar.find("[data-fancybox-fullscreen]").hide();
-      }
-    },
-
-    "afterKeydown.fb": function(e, instance, current, keypress, keycode) {
-      // "F"
-      if (instance && instance.FullScreen && keycode === 70) {
-        keypress.preventDefault();
-
-        instance.FullScreen.toggle();
-      }
-    },
-
-    "beforeClose.fb": function(e, instance) {
-      if (instance && instance.FullScreen && instance.$refs.container.hasClass("fancybox-is-fullscreen")) {
-        FullScreen.exit();
-      }
-    }
-  });
-
-  $(document).on(fn.fullscreenchange, function() {
-    var isFullscreen = FullScreen.isFullscreen(),
-      instance = $.fancybox.getInstance();
-
-    if (instance) {
-      // If image is zooming, then force to stop and reposition properly
-      if (instance.current && instance.current.type === "image" && instance.isAnimating) {
-        instance.current.$content.css("transition", "none");
-
-        instance.isAnimating = false;
-
-        instance.update(true, true, 0);
-      }
-
-      instance.trigger("onFullscreenChange", isFullscreen);
-
-      instance.$refs.container.toggleClass("fancybox-is-fullscreen", isFullscreen);
-    }
-  });
-})(document, window.jQuery || jQuery);
-
 // ==========================================================================
 //
 // Thumbs
@@ -20398,329 +20706,6 @@ var Dropdown = function ($) {
     }
   });
 })(document, window.jQuery || jQuery);
-
-//// ==========================================================================
-//
-// Share
-// Displays simple form for sharing current url
-//
-// ==========================================================================
-(function(document, $) {
-  "use strict";
-
-  $.extend(true, $.fancybox.defaults, {
-    btnTpl: {
-      share:
-        '<button data-fancybox-share class="fancybox-button fancybox-button--share" title="{{SHARE}}">' +
-        '<svg viewBox="0 0 40 40">' +
-        '<path d="M6,30 C8,18 19,16 23,16 L23,16 L23,10 L33,20 L23,29 L23,24 C19,24 8,27 6,30 Z">' +
-        "</svg>" +
-        "</button>"
-    },
-    share: {
-      url: function(instance, item) {
-        return (
-          (!instance.currentHash && !(item.type === "inline" || item.type === "html") ? item.origSrc || item.src : false) || window.location
-        );
-      },
-      tpl:
-        '<div class="fancybox-share">' +
-        "<h1>{{SHARE}}</h1>" +
-        "<p>" +
-        '<a class="fancybox-share__button fancybox-share__button--fb" href="https://www.facebook.com/sharer/sharer.php?u={{url}}">' +
-        '<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m287 456v-299c0-21 6-35 35-35h38v-63c-7-1-29-3-55-3-54 0-91 33-91 94v306m143-254h-205v72h196" /></svg>' +
-        "<span>Facebook</span>" +
-        "</a>" +
-        '<a class="fancybox-share__button fancybox-share__button--tw" href="https://twitter.com/intent/tweet?url={{url}}&text={{descr}}">' +
-        '<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m456 133c-14 7-31 11-47 13 17-10 30-27 37-46-15 10-34 16-52 20-61-62-157-7-141 75-68-3-129-35-169-85-22 37-11 86 26 109-13 0-26-4-37-9 0 39 28 72 65 80-12 3-25 4-37 2 10 33 41 57 77 57-42 30-77 38-122 34 170 111 378-32 359-208 16-11 30-25 41-42z" /></svg>' +
-        "<span>Twitter</span>" +
-        "</a>" +
-        '<a class="fancybox-share__button fancybox-share__button--pt" href="https://www.pinterest.com/pin/create/button/?url={{url}}&description={{descr}}&media={{media}}">' +
-        '<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m265 56c-109 0-164 78-164 144 0 39 15 74 47 87 5 2 10 0 12-5l4-19c2-6 1-8-3-13-9-11-15-25-15-45 0-58 43-110 113-110 62 0 96 38 96 88 0 67-30 122-73 122-24 0-42-19-36-44 6-29 20-60 20-81 0-19-10-35-31-35-25 0-44 26-44 60 0 21 7 36 7 36l-30 125c-8 37-1 83 0 87 0 3 4 4 5 2 2-3 32-39 42-75l16-64c8 16 31 29 56 29 74 0 124-67 124-157 0-69-58-132-146-132z" fill="#fff"/></svg>' +
-        "<span>Pinterest</span>" +
-        "</a>" +
-        "</p>" +
-        '<p><input class="fancybox-share__input" type="text" value="{{url_raw}}" /></p>' +
-        "</div>"
-    }
-  });
-
-  function escapeHtml(string) {
-    var entityMap = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;",
-      "/": "&#x2F;",
-      "`": "&#x60;",
-      "=": "&#x3D;"
-    };
-
-    return String(string).replace(/[&<>"'`=\/]/g, function(s) {
-      return entityMap[s];
-    });
-  }
-
-  $(document).on("click", "[data-fancybox-share]", function() {
-    var instance = $.fancybox.getInstance(),
-      current = instance.current || null,
-      url,
-      tpl;
-
-    if (!current) {
-      return;
-    }
-
-    if ($.type(current.opts.share.url) === "function") {
-      url = current.opts.share.url.apply(current, [instance, current]);
-    }
-
-    tpl = current.opts.share.tpl
-      .replace(/\{\{media\}\}/g, current.type === "image" ? encodeURIComponent(current.src) : "")
-      .replace(/\{\{url\}\}/g, encodeURIComponent(url))
-      .replace(/\{\{url_raw\}\}/g, escapeHtml(url))
-      .replace(/\{\{descr\}\}/g, instance.$caption ? encodeURIComponent(instance.$caption.text()) : "");
-
-    $.fancybox.open({
-      src: instance.translate(instance, tpl),
-      type: "html",
-      opts: {
-        animationEffect: false,
-        afterLoad: function(shareInstance, shareCurrent) {
-          // Close self if parent instance is closing
-          instance.$refs.container.one("beforeClose.fb", function() {
-            shareInstance.close(null, 0);
-          });
-
-          // Opening links in a popup window
-          shareCurrent.$content.find(".fancybox-share__links a").click(function() {
-            window.open(this.href, "Share", "width=550, height=450");
-            return false;
-          });
-        }
-      }
-    });
-  });
-})(document, window.jQuery || jQuery);
-
-// ==========================================================================
-//
-// Hash
-// Enables linking to each modal
-//
-// ==========================================================================
-(function(document, window, $) {
-  "use strict";
-
-  // Simple $.escapeSelector polyfill (for jQuery prior v3)
-  if (!$.escapeSelector) {
-    $.escapeSelector = function(sel) {
-      var rcssescape = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\x80-\uFFFF\w-]/g;
-      var fcssescape = function(ch, asCodePoint) {
-        if (asCodePoint) {
-          // U+0000 NULL becomes U+FFFD REPLACEMENT CHARACTER
-          if (ch === "\0") {
-            return "\uFFFD";
-          }
-
-          // Control characters and (dependent upon position) numbers get escaped as code points
-          return ch.slice(0, -1) + "\\" + ch.charCodeAt(ch.length - 1).toString(16) + " ";
-        }
-
-        // Other potentially-special ASCII characters get backslash-escaped
-        return "\\" + ch;
-      };
-
-      return (sel + "").replace(rcssescape, fcssescape);
-    };
-  }
-
-  // Get info about gallery name and current index from url
-  function parseUrl() {
-    var hash = window.location.hash.substr(1),
-      rez = hash.split("-"),
-      index = rez.length > 1 && /^\+?\d+$/.test(rez[rez.length - 1]) ? parseInt(rez.pop(-1), 10) || 1 : 1,
-      gallery = rez.join("-");
-
-    return {
-      hash: hash,
-      /* Index is starting from 1 */
-      index: index < 1 ? 1 : index,
-      gallery: gallery
-    };
-  }
-
-  // Trigger click evnt on links to open new fancyBox instance
-  function triggerFromUrl(url) {
-    var $el;
-
-    if (url.gallery !== "") {
-      // If we can find element matching 'data-fancybox' atribute, then trigger click event for that.
-      // It should start fancyBox
-      $el = $("[data-fancybox='" + $.escapeSelector(url.gallery) + "']")
-        .eq(url.index - 1)
-        .trigger("click.fb-start");
-    }
-  }
-
-  // Get gallery name from current instance
-  function getGalleryID(instance) {
-    var opts, ret;
-
-    if (!instance) {
-      return false;
-    }
-
-    opts = instance.current ? instance.current.opts : instance.opts;
-    ret = opts.hash || (opts.$orig ? opts.$orig.data("fancybox") : "");
-
-    return ret === "" ? false : ret;
-  }
-
-  // Start when DOM becomes ready
-  $(function() {
-    // Check if user has disabled this module
-    if ($.fancybox.defaults.hash === false) {
-      return;
-    }
-
-    // Update hash when opening/closing fancyBox
-    $(document).on({
-      "onInit.fb": function(e, instance) {
-        var url, gallery;
-
-        if (instance.group[instance.currIndex].opts.hash === false) {
-          return;
-        }
-
-        url = parseUrl();
-        gallery = getGalleryID(instance);
-
-        // Make sure gallery start index matches index from hash
-        if (gallery && url.gallery && gallery == url.gallery) {
-          instance.currIndex = url.index - 1;
-        }
-      },
-
-      "beforeShow.fb": function(e, instance, current, firstRun) {
-        var gallery;
-
-        if (!current || current.opts.hash === false) {
-          return;
-        }
-
-        // Check if need to update window hash
-        gallery = getGalleryID(instance);
-
-        if (!gallery) {
-          return;
-        }
-
-        // Variable containing last hash value set by fancyBox
-        // It will be used to determine if fancyBox needs to close after hash change is detected
-        instance.currentHash = gallery + (instance.group.length > 1 ? "-" + (current.index + 1) : "");
-
-        // If current hash is the same (this instance most likely is opened by hashchange), then do nothing
-        if (window.location.hash === "#" + instance.currentHash) {
-          return;
-        }
-
-        if (!instance.origHash) {
-          instance.origHash = window.location.hash;
-        }
-
-        if (instance.hashTimer) {
-          clearTimeout(instance.hashTimer);
-        }
-
-        // Update hash
-        instance.hashTimer = setTimeout(function() {
-          if ("replaceState" in window.history) {
-            window.history[firstRun ? "pushState" : "replaceState"](
-              {},
-              document.title,
-              window.location.pathname + window.location.search + "#" + instance.currentHash
-            );
-
-            if (firstRun) {
-              instance.hasCreatedHistory = true;
-            }
-          } else {
-            window.location.hash = instance.currentHash;
-          }
-
-          instance.hashTimer = null;
-        }, 300);
-      },
-
-      "beforeClose.fb": function(e, instance, current) {
-        var gallery;
-
-        if (current.opts.hash === false) {
-          return;
-        }
-
-        gallery = getGalleryID(instance);
-
-        // Goto previous history entry
-        if (instance.currentHash && instance.hasCreatedHistory) {
-          window.history.back();
-        } else if (instance.currentHash) {
-          if ("replaceState" in window.history) {
-            window.history.replaceState({}, document.title, window.location.pathname + window.location.search + (instance.origHash || ""));
-          } else {
-            window.location.hash = instance.origHash;
-          }
-        }
-
-        instance.currentHash = null;
-
-        clearTimeout(instance.hashTimer);
-      }
-    });
-
-    // Check if need to start/close after url has changed
-    $(window).on("hashchange.fb", function() {
-      var url = parseUrl(),
-        fb;
-
-      // Find last fancyBox instance that has "hash"
-      $.each(
-        $(".fancybox-container")
-          .get()
-          .reverse(),
-        function(index, value) {
-          var tmp = $(value).data("FancyBox");
-          //isClosing
-          if (tmp.currentHash) {
-            fb = tmp;
-            return false;
-          }
-        }
-      );
-
-      if (fb) {
-        // Now, compare hash values
-        if (fb.currentHash && fb.currentHash !== url.gallery + "-" + url.index && !(url.index === 1 && fb.currentHash == url.gallery)) {
-          fb.currentHash = null;
-
-          fb.close();
-        }
-      } else if (url.gallery !== "") {
-        triggerFromUrl(url);
-      }
-    });
-
-    // Check current hash and trigger click event on matching element to start fancyBox, if needed
-    setTimeout(function() {
-      if (!$.fancybox.getInstance()) {
-        triggerFromUrl(parseUrl());
-      }
-    }, 50);
-  });
-})(document, window, window.jQuery || jQuery);
-
 // ==========================================================================
 //
 // Wheel
@@ -20762,666 +20747,7 @@ var Dropdown = function ($) {
     }
   });
 })(document, window.jQuery || jQuery);
-/*!
- * Stellar.js v0.6.2
- * http://markdalgleish.com/projects/stellar.js
- * 
- * Copyright 2013, Mark Dalgleish
- * This content is released under the MIT license
- * http://markdalgleish.mit-license.org
- */
 
-;(function($, window, document, undefined) {
-
-	var pluginName = 'stellar',
-		defaults = {
-			scrollProperty: 'scroll',
-			positionProperty: 'position',
-			horizontalScrolling: true,
-			verticalScrolling: true,
-			horizontalOffset: 0,
-			verticalOffset: 0,
-			responsive: false,
-			parallaxBackgrounds: true,
-			parallaxElements: true,
-			hideDistantElements: true,
-			hideElement: function($elem) { $elem.hide(); },
-			showElement: function($elem) { $elem.show(); }
-		},
-
-		scrollProperty = {
-			scroll: {
-				getLeft: function($elem) { return $elem.scrollLeft(); },
-				setLeft: function($elem, val) { $elem.scrollLeft(val); },
-
-				getTop: function($elem) { return $elem.scrollTop();	},
-				setTop: function($elem, val) { $elem.scrollTop(val); }
-			},
-			position: {
-				getLeft: function($elem) { return parseInt($elem.css('left'), 10) * -1; },
-				getTop: function($elem) { return parseInt($elem.css('top'), 10) * -1; }
-			},
-			margin: {
-				getLeft: function($elem) { return parseInt($elem.css('margin-left'), 10) * -1; },
-				getTop: function($elem) { return parseInt($elem.css('margin-top'), 10) * -1; }
-			},
-			transform: {
-				getLeft: function($elem) {
-					var computedTransform = getComputedStyle($elem[0])[prefixedTransform];
-					return (computedTransform !== 'none' ? parseInt(computedTransform.match(/(-?[0-9]+)/g)[4], 10) * -1 : 0);
-				},
-				getTop: function($elem) {
-					var computedTransform = getComputedStyle($elem[0])[prefixedTransform];
-					return (computedTransform !== 'none' ? parseInt(computedTransform.match(/(-?[0-9]+)/g)[5], 10) * -1 : 0);
-				}
-			}
-		},
-
-		positionProperty = {
-			position: {
-				setLeft: function($elem, left) { $elem.css('left', left); },
-				setTop: function($elem, top) { $elem.css('top', top); }
-			},
-			transform: {
-				setPosition: function($elem, left, startingLeft, top, startingTop) {
-					$elem[0].style[prefixedTransform] = 'translate3d(' + (left - startingLeft) + 'px, ' + (top - startingTop) + 'px, 0)';
-				}
-			}
-		},
-
-		// Returns a function which adds a vendor prefix to any CSS property name
-		vendorPrefix = (function() {
-			var prefixes = /^(Moz|Webkit|Khtml|O|ms|Icab)(?=[A-Z])/,
-				style = $('script')[0].style,
-				prefix = '',
-				prop;
-
-			for (prop in style) {
-				if (prefixes.test(prop)) {
-					prefix = prop.match(prefixes)[0];
-					break;
-				}
-			}
-
-			if ('WebkitOpacity' in style) { prefix = 'Webkit'; }
-			if ('KhtmlOpacity' in style) { prefix = 'Khtml'; }
-
-			return function(property) {
-				return prefix + (prefix.length > 0 ? property.charAt(0).toUpperCase() + property.slice(1) : property);
-			};
-		}()),
-
-		prefixedTransform = vendorPrefix('transform'),
-
-		supportsBackgroundPositionXY = $('<div />', { style: 'background:#fff' }).css('background-position-x') !== undefined,
-
-		setBackgroundPosition = (supportsBackgroundPositionXY ?
-			function($elem, x, y) {
-				$elem.css({
-					'background-position-x': x,
-					'background-position-y': y
-				});
-			} :
-			function($elem, x, y) {
-				$elem.css('background-position', x + ' ' + y);
-			}
-		),
-
-		getBackgroundPosition = (supportsBackgroundPositionXY ?
-			function($elem) {
-				return [
-					$elem.css('background-position-x'),
-					$elem.css('background-position-y')
-				];
-			} :
-			function($elem) {
-				return $elem.css('background-position').split(' ');
-			}
-		),
-
-		requestAnimFrame = (
-			window.requestAnimationFrame       ||
-			window.webkitRequestAnimationFrame ||
-			window.mozRequestAnimationFrame    ||
-			window.oRequestAnimationFrame      ||
-			window.msRequestAnimationFrame     ||
-			function(callback) {
-				setTimeout(callback, 1000 / 60);
-			}
-		);
-
-	function Plugin(element, options) {
-		this.element = element;
-		this.options = $.extend({}, defaults, options);
-
-		this._defaults = defaults;
-		this._name = pluginName;
-
-		this.init();
-	}
-
-	Plugin.prototype = {
-		init: function() {
-			this.options.name = pluginName + '_' + Math.floor(Math.random() * 1e9);
-
-			this._defineElements();
-			this._defineGetters();
-			this._defineSetters();
-			this._handleWindowLoadAndResize();
-			this._detectViewport();
-
-			this.refresh({ firstLoad: true });
-
-			if (this.options.scrollProperty === 'scroll') {
-				this._handleScrollEvent();
-			} else {
-				this._startAnimationLoop();
-			}
-		},
-		_defineElements: function() {
-			if (this.element === document.body) this.element = window;
-			this.$scrollElement = $(this.element);
-			this.$element = (this.element === window ? $('body') : this.$scrollElement);
-			this.$viewportElement = (this.options.viewportElement !== undefined ? $(this.options.viewportElement) : (this.$scrollElement[0] === window || this.options.scrollProperty === 'scroll' ? this.$scrollElement : this.$scrollElement.parent()) );
-		},
-		_defineGetters: function() {
-			var self = this,
-				scrollPropertyAdapter = scrollProperty[self.options.scrollProperty];
-
-			this._getScrollLeft = function() {
-				return scrollPropertyAdapter.getLeft(self.$scrollElement);
-			};
-
-			this._getScrollTop = function() {
-				return scrollPropertyAdapter.getTop(self.$scrollElement);
-			};
-		},
-		_defineSetters: function() {
-			var self = this,
-				scrollPropertyAdapter = scrollProperty[self.options.scrollProperty],
-				positionPropertyAdapter = positionProperty[self.options.positionProperty],
-				setScrollLeft = scrollPropertyAdapter.setLeft,
-				setScrollTop = scrollPropertyAdapter.setTop;
-
-			this._setScrollLeft = (typeof setScrollLeft === 'function' ? function(val) {
-				setScrollLeft(self.$scrollElement, val);
-			} : $.noop);
-
-			this._setScrollTop = (typeof setScrollTop === 'function' ? function(val) {
-				setScrollTop(self.$scrollElement, val);
-			} : $.noop);
-
-			this._setPosition = positionPropertyAdapter.setPosition ||
-				function($elem, left, startingLeft, top, startingTop) {
-					if (self.options.horizontalScrolling) {
-						positionPropertyAdapter.setLeft($elem, left, startingLeft);
-					}
-
-					if (self.options.verticalScrolling) {
-						positionPropertyAdapter.setTop($elem, top, startingTop);
-					}
-				};
-		},
-		_handleWindowLoadAndResize: function() {
-			var self = this,
-				$window = $(window);
-
-			if (self.options.responsive) {
-				$window.bind('load.' + this.name, function() {
-					self.refresh();
-				});
-			}
-
-			$window.bind('resize.' + this.name, function() {
-				self._detectViewport();
-
-				if (self.options.responsive) {
-					self.refresh();
-				}
-			});
-		},
-		refresh: function(options) {
-			var self = this,
-				oldLeft = self._getScrollLeft(),
-				oldTop = self._getScrollTop();
-
-			if (!options || !options.firstLoad) {
-				this._reset();
-			}
-
-			this._setScrollLeft(0);
-			this._setScrollTop(0);
-
-			this._setOffsets();
-			this._findParticles();
-			this._findBackgrounds();
-
-			// Fix for WebKit background rendering bug
-			if (options && options.firstLoad && /WebKit/.test(navigator.userAgent)) {
-				$(window).load(function() {
-					var oldLeft = self._getScrollLeft(),
-						oldTop = self._getScrollTop();
-
-					self._setScrollLeft(oldLeft + 1);
-					self._setScrollTop(oldTop + 1);
-
-					self._setScrollLeft(oldLeft);
-					self._setScrollTop(oldTop);
-				});
-			}
-
-			this._setScrollLeft(oldLeft);
-			this._setScrollTop(oldTop);
-		},
-		_detectViewport: function() {
-			var viewportOffsets = this.$viewportElement.offset(),
-				hasOffsets = viewportOffsets !== null && viewportOffsets !== undefined;
-
-			this.viewportWidth = this.$viewportElement.width();
-			this.viewportHeight = this.$viewportElement.height();
-
-			this.viewportOffsetTop = (hasOffsets ? viewportOffsets.top : 0);
-			this.viewportOffsetLeft = (hasOffsets ? viewportOffsets.left : 0);
-		},
-		_findParticles: function() {
-			var self = this,
-				scrollLeft = this._getScrollLeft(),
-				scrollTop = this._getScrollTop();
-
-			if (this.particles !== undefined) {
-				for (var i = this.particles.length - 1; i >= 0; i--) {
-					this.particles[i].$element.data('stellar-elementIsActive', undefined);
-				}
-			}
-
-			this.particles = [];
-
-			if (!this.options.parallaxElements) return;
-
-			this.$element.find('[data-stellar-ratio]').each(function(i) {
-				var $this = $(this),
-					horizontalOffset,
-					verticalOffset,
-					positionLeft,
-					positionTop,
-					marginLeft,
-					marginTop,
-					$offsetParent,
-					offsetLeft,
-					offsetTop,
-					parentOffsetLeft = 0,
-					parentOffsetTop = 0,
-					tempParentOffsetLeft = 0,
-					tempParentOffsetTop = 0;
-
-				// Ensure this element isn't already part of another scrolling element
-				if (!$this.data('stellar-elementIsActive')) {
-					$this.data('stellar-elementIsActive', this);
-				} else if ($this.data('stellar-elementIsActive') !== this) {
-					return;
-				}
-
-				self.options.showElement($this);
-
-				// Save/restore the original top and left CSS values in case we refresh the particles or destroy the instance
-				if (!$this.data('stellar-startingLeft')) {
-					$this.data('stellar-startingLeft', $this.css('left'));
-					$this.data('stellar-startingTop', $this.css('top'));
-				} else {
-					$this.css('left', $this.data('stellar-startingLeft'));
-					$this.css('top', $this.data('stellar-startingTop'));
-				}
-
-				positionLeft = $this.position().left;
-				positionTop = $this.position().top;
-
-				// Catch-all for margin top/left properties (these evaluate to 'auto' in IE7 and IE8)
-				marginLeft = ($this.css('margin-left') === 'auto') ? 0 : parseInt($this.css('margin-left'), 10);
-				marginTop = ($this.css('margin-top') === 'auto') ? 0 : parseInt($this.css('margin-top'), 10);
-
-				offsetLeft = $this.offset().left - marginLeft;
-				offsetTop = $this.offset().top - marginTop;
-
-				// Calculate the offset parent
-				$this.parents().each(function() {
-					var $this = $(this);
-
-					if ($this.data('stellar-offset-parent') === true) {
-						parentOffsetLeft = tempParentOffsetLeft;
-						parentOffsetTop = tempParentOffsetTop;
-						$offsetParent = $this;
-
-						return false;
-					} else {
-						tempParentOffsetLeft += $this.position().left;
-						tempParentOffsetTop += $this.position().top;
-					}
-				});
-
-				// Detect the offsets
-				horizontalOffset = ($this.data('stellar-horizontal-offset') !== undefined ? $this.data('stellar-horizontal-offset') : ($offsetParent !== undefined && $offsetParent.data('stellar-horizontal-offset') !== undefined ? $offsetParent.data('stellar-horizontal-offset') : self.horizontalOffset));
-				verticalOffset = ($this.data('stellar-vertical-offset') !== undefined ? $this.data('stellar-vertical-offset') : ($offsetParent !== undefined && $offsetParent.data('stellar-vertical-offset') !== undefined ? $offsetParent.data('stellar-vertical-offset') : self.verticalOffset));
-
-				// Add our object to the particles collection
-				self.particles.push({
-					$element: $this,
-					$offsetParent: $offsetParent,
-					isFixed: $this.css('position') === 'fixed',
-					horizontalOffset: horizontalOffset,
-					verticalOffset: verticalOffset,
-					startingPositionLeft: positionLeft,
-					startingPositionTop: positionTop,
-					startingOffsetLeft: offsetLeft,
-					startingOffsetTop: offsetTop,
-					parentOffsetLeft: parentOffsetLeft,
-					parentOffsetTop: parentOffsetTop,
-					stellarRatio: ($this.data('stellar-ratio') !== undefined ? $this.data('stellar-ratio') : 1),
-					width: $this.outerWidth(true),
-					height: $this.outerHeight(true),
-					isHidden: false
-				});
-			});
-		},
-		_findBackgrounds: function() {
-			var self = this,
-				scrollLeft = this._getScrollLeft(),
-				scrollTop = this._getScrollTop(),
-				$backgroundElements;
-
-			this.backgrounds = [];
-
-			if (!this.options.parallaxBackgrounds) return;
-
-			$backgroundElements = this.$element.find('[data-stellar-background-ratio]');
-
-			if (this.$element.data('stellar-background-ratio')) {
-                $backgroundElements = $backgroundElements.add(this.$element);
-			}
-
-			$backgroundElements.each(function() {
-				var $this = $(this),
-					backgroundPosition = getBackgroundPosition($this),
-					horizontalOffset,
-					verticalOffset,
-					positionLeft,
-					positionTop,
-					marginLeft,
-					marginTop,
-					offsetLeft,
-					offsetTop,
-					$offsetParent,
-					parentOffsetLeft = 0,
-					parentOffsetTop = 0,
-					tempParentOffsetLeft = 0,
-					tempParentOffsetTop = 0;
-
-				// Ensure this element isn't already part of another scrolling element
-				if (!$this.data('stellar-backgroundIsActive')) {
-					$this.data('stellar-backgroundIsActive', this);
-				} else if ($this.data('stellar-backgroundIsActive') !== this) {
-					return;
-				}
-
-				// Save/restore the original top and left CSS values in case we destroy the instance
-				if (!$this.data('stellar-backgroundStartingLeft')) {
-					$this.data('stellar-backgroundStartingLeft', backgroundPosition[0]);
-					$this.data('stellar-backgroundStartingTop', backgroundPosition[1]);
-				} else {
-					setBackgroundPosition($this, $this.data('stellar-backgroundStartingLeft'), $this.data('stellar-backgroundStartingTop'));
-				}
-
-				// Catch-all for margin top/left properties (these evaluate to 'auto' in IE7 and IE8)
-				marginLeft = ($this.css('margin-left') === 'auto') ? 0 : parseInt($this.css('margin-left'), 10);
-				marginTop = ($this.css('margin-top') === 'auto') ? 0 : parseInt($this.css('margin-top'), 10);
-
-				offsetLeft = $this.offset().left - marginLeft - scrollLeft;
-				offsetTop = $this.offset().top - marginTop - scrollTop;
-				
-				// Calculate the offset parent
-				$this.parents().each(function() {
-					var $this = $(this);
-
-					if ($this.data('stellar-offset-parent') === true) {
-						parentOffsetLeft = tempParentOffsetLeft;
-						parentOffsetTop = tempParentOffsetTop;
-						$offsetParent = $this;
-
-						return false;
-					} else {
-						tempParentOffsetLeft += $this.position().left;
-						tempParentOffsetTop += $this.position().top;
-					}
-				});
-
-				// Detect the offsets
-				horizontalOffset = ($this.data('stellar-horizontal-offset') !== undefined ? $this.data('stellar-horizontal-offset') : ($offsetParent !== undefined && $offsetParent.data('stellar-horizontal-offset') !== undefined ? $offsetParent.data('stellar-horizontal-offset') : self.horizontalOffset));
-				verticalOffset = ($this.data('stellar-vertical-offset') !== undefined ? $this.data('stellar-vertical-offset') : ($offsetParent !== undefined && $offsetParent.data('stellar-vertical-offset') !== undefined ? $offsetParent.data('stellar-vertical-offset') : self.verticalOffset));
-
-				self.backgrounds.push({
-					$element: $this,
-					$offsetParent: $offsetParent,
-					isFixed: $this.css('background-attachment') === 'fixed',
-					horizontalOffset: horizontalOffset,
-					verticalOffset: verticalOffset,
-					startingValueLeft: backgroundPosition[0],
-					startingValueTop: backgroundPosition[1],
-					startingBackgroundPositionLeft: (isNaN(parseInt(backgroundPosition[0], 10)) ? 0 : parseInt(backgroundPosition[0], 10)),
-					startingBackgroundPositionTop: (isNaN(parseInt(backgroundPosition[1], 10)) ? 0 : parseInt(backgroundPosition[1], 10)),
-					startingPositionLeft: $this.position().left,
-					startingPositionTop: $this.position().top,
-					startingOffsetLeft: offsetLeft,
-					startingOffsetTop: offsetTop,
-					parentOffsetLeft: parentOffsetLeft,
-					parentOffsetTop: parentOffsetTop,
-					stellarRatio: ($this.data('stellar-background-ratio') === undefined ? 1 : $this.data('stellar-background-ratio'))
-				});
-			});
-		},
-		_reset: function() {
-			var particle,
-				startingPositionLeft,
-				startingPositionTop,
-				background,
-				i;
-
-			for (i = this.particles.length - 1; i >= 0; i--) {
-				particle = this.particles[i];
-				startingPositionLeft = particle.$element.data('stellar-startingLeft');
-				startingPositionTop = particle.$element.data('stellar-startingTop');
-
-				this._setPosition(particle.$element, startingPositionLeft, startingPositionLeft, startingPositionTop, startingPositionTop);
-
-				this.options.showElement(particle.$element);
-
-				particle.$element.data('stellar-startingLeft', null).data('stellar-elementIsActive', null).data('stellar-backgroundIsActive', null);
-			}
-
-			for (i = this.backgrounds.length - 1; i >= 0; i--) {
-				background = this.backgrounds[i];
-
-				background.$element.data('stellar-backgroundStartingLeft', null).data('stellar-backgroundStartingTop', null);
-
-				setBackgroundPosition(background.$element, background.startingValueLeft, background.startingValueTop);
-			}
-		},
-		destroy: function() {
-			this._reset();
-
-			this.$scrollElement.unbind('resize.' + this.name).unbind('scroll.' + this.name);
-			this._animationLoop = $.noop;
-
-			$(window).unbind('load.' + this.name).unbind('resize.' + this.name);
-		},
-		_setOffsets: function() {
-			var self = this,
-				$window = $(window);
-
-			$window.unbind('resize.horizontal-' + this.name).unbind('resize.vertical-' + this.name);
-
-			if (typeof this.options.horizontalOffset === 'function') {
-				this.horizontalOffset = this.options.horizontalOffset();
-				$window.bind('resize.horizontal-' + this.name, function() {
-					self.horizontalOffset = self.options.horizontalOffset();
-				});
-			} else {
-				this.horizontalOffset = this.options.horizontalOffset;
-			}
-
-			if (typeof this.options.verticalOffset === 'function') {
-				this.verticalOffset = this.options.verticalOffset();
-				$window.bind('resize.vertical-' + this.name, function() {
-					self.verticalOffset = self.options.verticalOffset();
-				});
-			} else {
-				this.verticalOffset = this.options.verticalOffset;
-			}
-		},
-		_repositionElements: function() {
-			var scrollLeft = this._getScrollLeft(),
-				scrollTop = this._getScrollTop(),
-				horizontalOffset,
-				verticalOffset,
-				particle,
-				fixedRatioOffset,
-				background,
-				bgLeft,
-				bgTop,
-				isVisibleVertical = true,
-				isVisibleHorizontal = true,
-				newPositionLeft,
-				newPositionTop,
-				newOffsetLeft,
-				newOffsetTop,
-				i;
-
-			// First check that the scroll position or container size has changed
-			if (this.currentScrollLeft === scrollLeft && this.currentScrollTop === scrollTop && this.currentWidth === this.viewportWidth && this.currentHeight === this.viewportHeight) {
-				return;
-			} else {
-				this.currentScrollLeft = scrollLeft;
-				this.currentScrollTop = scrollTop;
-				this.currentWidth = this.viewportWidth;
-				this.currentHeight = this.viewportHeight;
-			}
-
-			// Reposition elements
-			for (i = this.particles.length - 1; i >= 0; i--) {
-				particle = this.particles[i];
-
-				fixedRatioOffset = (particle.isFixed ? 1 : 0);
-
-				// Calculate position, then calculate what the particle's new offset will be (for visibility check)
-				if (this.options.horizontalScrolling) {
-					newPositionLeft = (scrollLeft + particle.horizontalOffset + this.viewportOffsetLeft + particle.startingPositionLeft - particle.startingOffsetLeft + particle.parentOffsetLeft) * -(particle.stellarRatio + fixedRatioOffset - 1) + particle.startingPositionLeft;
-					newOffsetLeft = newPositionLeft - particle.startingPositionLeft + particle.startingOffsetLeft;
-				} else {
-					newPositionLeft = particle.startingPositionLeft;
-					newOffsetLeft = particle.startingOffsetLeft;
-				}
-
-				if (this.options.verticalScrolling) {
-					newPositionTop = (scrollTop + particle.verticalOffset + this.viewportOffsetTop + particle.startingPositionTop - particle.startingOffsetTop + particle.parentOffsetTop) * -(particle.stellarRatio + fixedRatioOffset - 1) + particle.startingPositionTop;
-					newOffsetTop = newPositionTop - particle.startingPositionTop + particle.startingOffsetTop;
-				} else {
-					newPositionTop = particle.startingPositionTop;
-					newOffsetTop = particle.startingOffsetTop;
-				}
-
-				// Check visibility
-				if (this.options.hideDistantElements) {
-					isVisibleHorizontal = !this.options.horizontalScrolling || newOffsetLeft + particle.width > (particle.isFixed ? 0 : scrollLeft) && newOffsetLeft < (particle.isFixed ? 0 : scrollLeft) + this.viewportWidth + this.viewportOffsetLeft;
-					isVisibleVertical = !this.options.verticalScrolling || newOffsetTop + particle.height > (particle.isFixed ? 0 : scrollTop) && newOffsetTop < (particle.isFixed ? 0 : scrollTop) + this.viewportHeight + this.viewportOffsetTop;
-				}
-
-				if (isVisibleHorizontal && isVisibleVertical) {
-					if (particle.isHidden) {
-						this.options.showElement(particle.$element);
-						particle.isHidden = false;
-					}
-
-					this._setPosition(particle.$element, newPositionLeft, particle.startingPositionLeft, newPositionTop, particle.startingPositionTop);
-				} else {
-					if (!particle.isHidden) {
-						this.options.hideElement(particle.$element);
-						particle.isHidden = true;
-					}
-				}
-			}
-
-			// Reposition backgrounds
-			for (i = this.backgrounds.length - 1; i >= 0; i--) {
-				background = this.backgrounds[i];
-
-				fixedRatioOffset = (background.isFixed ? 0 : 1);
-				bgLeft = (this.options.horizontalScrolling ? (scrollLeft + background.horizontalOffset - this.viewportOffsetLeft - background.startingOffsetLeft + background.parentOffsetLeft - background.startingBackgroundPositionLeft) * (fixedRatioOffset - background.stellarRatio) + 'px' : background.startingValueLeft);
-				bgTop = (this.options.verticalScrolling ? (scrollTop + background.verticalOffset - this.viewportOffsetTop - background.startingOffsetTop + background.parentOffsetTop - background.startingBackgroundPositionTop) * (fixedRatioOffset - background.stellarRatio) + 'px' : background.startingValueTop);
-
-				setBackgroundPosition(background.$element, bgLeft, bgTop);
-			}
-		},
-		_handleScrollEvent: function() {
-			var self = this,
-				ticking = false;
-
-			var update = function() {
-				self._repositionElements();
-				ticking = false;
-			};
-
-			var requestTick = function() {
-				if (!ticking) {
-					requestAnimFrame(update);
-					ticking = true;
-				}
-			};
-			
-			this.$scrollElement.bind('scroll.' + this.name, requestTick);
-			requestTick();
-		},
-		_startAnimationLoop: function() {
-			var self = this;
-
-			this._animationLoop = function() {
-				requestAnimFrame(self._animationLoop);
-				self._repositionElements();
-			};
-			this._animationLoop();
-		}
-	};
-
-	$.fn[pluginName] = function (options) {
-		var args = arguments;
-		if (options === undefined || typeof options === 'object') {
-			return this.each(function () {
-				if (!$.data(this, 'plugin_' + pluginName)) {
-					$.data(this, 'plugin_' + pluginName, new Plugin(this, options));
-				}
-			});
-		} else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
-			return this.each(function () {
-				var instance = $.data(this, 'plugin_' + pluginName);
-				if (instance instanceof Plugin && typeof instance[options] === 'function') {
-					instance[options].apply(instance, Array.prototype.slice.call(args, 1));
-				}
-				if (options === 'destroy') {
-					$.data(this, 'plugin_' + pluginName, null);
-				}
-			});
-		}
-	};
-
-	$[pluginName] = function(options) {
-		var $window = $(window);
-		return $window.stellar.apply($window, Array.prototype.slice.call(arguments, 0));
-	};
-
-	// Expose the scroll and position property function hashes so they can be extended
-	$[pluginName].scrollProperty = scrollProperty;
-	$[pluginName].positionProperty = positionProperty;
-
-	// Expose the plugin class so it can be modified
-	window.Stellar = Plugin;
-}(jQuery, this, document));
 /*
  * jQuery Easing v1.4.1 - http://gsgd.co.uk/sandbox/jquery/easing/
  * Open source under the BSD License.
