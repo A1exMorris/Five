@@ -10961,9 +10961,6 @@ body, html {
 
 .paral {
     background-attachment: fixed;
-    background-size: cover;
-    background-position: right top;
-    background-repeat: no-repeat;
 }
 
 .paral p {
@@ -10988,6 +10985,12 @@ body, html {
     height: 105%;
     border-radius: 0;
     width: 100%;
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
 
 .flickerAnimation {

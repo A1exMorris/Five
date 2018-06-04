@@ -292,9 +292,7 @@
                 $('.navigation li[data-slide="' + tempdataslide + '"]').addClass('active').next().removeClass('active');
             }
 
-        },
-
-        );
+        });
 
         //waypoints doesnt detect the first slide when user scrolls back up to the top so we add this little bit of code, that removes the class
         //from navigation link slide 2 and adds it to navigation link slide 1.

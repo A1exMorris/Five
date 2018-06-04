@@ -5,9 +5,9 @@ body, html{
 .paral{
 
   background-attachment: fixed;
-  background-size: cover;
-  background-position: right top;
-  background-repeat: no-repeat;
+
+
+
 
 
   p{
@@ -33,10 +33,15 @@ body, html{
 
 
 .paralsec1 {
-background-image: url("../i/mainSlider1.jpg");
-  height: 105%;
+background-image: url("../i/mainSlider1.jpg");  height: 105%;
 border-radius: 0;
 width: 100%;
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 
 .flickerAnimation {

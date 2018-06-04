@@ -3,10 +3,11 @@
   <head>
       
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!--  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
- <link rel="icon" href="assets/i/logo2.png">
+    <link rel="icon" href="assets/i/logo2.png">
 
     <title>NPhotography</title>
 
@@ -150,42 +151,16 @@
     </div>
     </div><!--Footer-->
     <!--Script section-->
-<!--    <script src="assets/js/main.js"></script>-->
-  <!--<script>
+    <script src="assets/js/main.js"></script>
+  <script>
+      jQuery(document).ready(function($){
+          var deviceAgent = navigator.userAgent.toLowerCase();
 
-      $(document).ready(function() {
-
-          var slideIndex = 1;
-
-
-          showSlides();
-
-          function showSlides() {
-
-              var slides = document.getElementById("mainSlider");
-                switch (slideIndex) {
-                    case 1:
-                        slides.classList.remove('paralsec1');
-                        slides.classList.add('paralsec2');
-                        break;
-                    case 2:
-                        slides.classList.remove('paralsec2');
-                        slides.classList.add('paralsec3');
-                        break;
-                    case 3:
-                        slides.classList.remove('paralsec3');
-                        slides.classList.add('paralsec1');
-                        break;
-                }
-              slideIndex++;
-
-              if (slideIndex > 3) {slideIndex = 1;}
-
-              setTimeout(showSlides, 10000); // Change image every 2 seconds
+          if (deviceAgent.match(/(iphone|ipod|ipad)/)) {
+              $('.paral').removeClass('paral');
           }
       });
-
-  </script>-->
+  </script>
   </body>
 
 </html>
