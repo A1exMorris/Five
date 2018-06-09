@@ -52,7 +52,55 @@
 
 <div class="container pt-5" >
 
-    <div class="flickerAnimation paral2" style="height: 400px"></div>
+    <div class="container d-inline-block">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="assets/i/mainSlider1.jpg" style="width: 100%" alt="Chania">
+                    <div class="carousel-caption">
+                        <h3> </h3>
+                        <p> </p>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="assets/i/mainSlider2.jpg" style="width: 100%" alt="Chicago">
+                    <div class="carousel-caption">
+                        <h3> </h3>
+                        <p> </p>
+                    </div>
+                </div>
+
+                <div class="carousel-item" >
+                    <img src="assets/i/mainSlider3.jpg" style="width: 100%" alt="New York">
+                    <div class="carousel-caption">
+                        <h3></h3>
+                        <p> </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+
+        </div>
+    </div>
 
  <!--   <img class="imageTrans" src="assets/i/piter.jpg" style="width: 120px; height: 120px; border-radius: 50%; position: absolute; right: 0;top: 0;">
     <div class="loader" style="position: absolute; right: 0;top:0;"></div>-->

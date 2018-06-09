@@ -17,7 +17,7 @@
     "bootstrap": "4.1.0",
       "popper.js": "1.14.3",
       "clamp-js":"",
-   // "fancyBox":"",
+    "fancyBox":"",
     "datatables.net":"",
     "datatables.net-dt":"",
     "jquery.stellar": "",
