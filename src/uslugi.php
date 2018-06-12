@@ -59,46 +59,46 @@
 
 <!--<div class="envatologo">222</div>-->
 
-<div style="height:90%; z-index: -3;"></div>
+<div style="height:90vh; z-index: -3;"></div>
 <div class="slide " id="slide1" data-slide="1" data-stellar-ratio="1" style="z-index: 1; position: fixed; top:0;">
- <div class="row m-0 h-25 bg-white"></div>
- <div class="row m-0 h-50 bg-gray-light">
-     <div class="col-12 my-auto text-center"> Индивидуальная фотосъемка </div>
+ <div class="row m-0 bg-white" style="height: 25vh"></div>
+ <div class="row m-0 bg-gray-light" style="height: 50vh">
+     <div class="col-12 my-auto text-center"> <a href="#1">Индивидуальная фотосъемка</a></div>
  </div>
- <div class="row m-0 h-25 bg-white"></div>
+ <div class="row m-0 bg-white" style="height: 25vh"></div>
 </div><!--End Slide 1-->
 
 <div class="scroller_anchor"></div>
 <div class="slide scroller" id="slide2" data-slide="2" data-stellar-ratio="1" style="z-index: 2;">
-    <div class="row m-0 h-25 bg-transparent"></div>
-    <div class="row m-0 h-50 bg-primary">
-        <div class="col-12 my-auto text-center"> Love story, друзья </div>
+    <div class="row m-0   bg-transparent" style="height: 25vh"></div>
+    <div class="row m-0 bg-primary" style="height: 50vh">
+        <div class="col-12 my-auto text-center"> <a href="#2">Love story, друзья </a></div>
     </div>
-    <div class="row m-0 h-25 bg-transparent"></div>
+    <div class="row m-0   bg-transparent" style="height: 25vh"></div>
 </div><!--End Slide 2-->
 <div class="scroller_anchor1"></div>
-<div class="slide scroller1" id="slide3" data-slide="3" data-stellar-ratio="1" style="z-index: 3">
-    <div class="row m-0 h-25  bg-transparent"></div>
-    <div class="row m-0 h-50 bg-info">
-        <div class="col-12 my-auto text-center"> Семейная съемка </div>
+<div class="slide scroller1" id="slide3" data-slide="3" data-stellar-ratio="1" style="z-index: 2">
+    <div class="row m-0    bg-transparent" style="height: 25vh"></div>
+    <div class="row m-0 bg-info" style="height: 50vh">
+        <div class="col-12 my-auto text-center"> <a href="#3"> Семейная съемка </a></div>
     </div>
-    <div class="row m-0 h-25  bg-transparent"></div>
+    <div class="row m-0    bg-transparent" style="height: 25vh"></div>
 </div><!--End Slide 3-->
 <div class="scroller_anchor2"></div>
-<div class="slide scroller2" id="slide3" data-slide="3" data-stellar-ratio="1" style="z-index: 3">
-    <div class="row m-0 h-25  bg-transparent"></div>
-    <div class="row m-0 h-50 bg-warning">
-        <div class="col-12 my-auto text-center"> Подарочный сертификат </div>
+<div class="slide scroller2" id="slide4" data-slide="3" data-stellar-ratio="1" style="z-index: 2">
+    <div class="row m-0    bg-transparent" style="height: 25vh"></div>
+    <div class="row m-0 bg-warning" style="height: 50vh" >
+        <div class="col-12 my-auto text-center"><a href="#4"> Подарочный сертификат </a></div>
     </div>
-    <div class="row m-0 h-25  bg-transparent"></div>
+    <div class="row m-0    bg-transparent" style="height: 25vh"></div>
 </div><!--End Slide 4-->
 <div class="scroller_anchor3"></div>
-<div class="slide scroller3" id="slide3" data-slide="3" data-stellar-ratio="1" style="z-index: 3">
-    <div class="row m-0 h-25  bg-transparent"></div>
-    <div class="row m-0 h-50 bg-success text-center align-self-center">
-        <div class="col-12 my-auto"> Дополнительные услуги</div>
+<div class="slide scroller3" id="slide5" data-slide="3" data-stellar-ratio="1" style="z-index: 2">
+    <div class="row m-0    bg-transparent" style="height: 25vh"></div>
+    <div class="row m-0 bg-success text-center align-self-center" style="height: 50vh" ">
+    <div class="col-12 my-auto"> <a href="#5">Дополнительные услуги</a></div>
     </div>
-    <div class="row m-0 h-25  bg-transparent"></div>
+    <div class="row m-0    bg-transparent" style="height: 25vh"></div>
 </div><!--End Slide 5-->
 
     <div class="footer text-center pt-3 pb-3"  style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif">
@@ -156,21 +156,22 @@
             // Check if the user has scrolled and the current position is after the scroller start location and if its not already fixed at the top
             if ($(this).scrollTop() > scroller_anchor && $('.scroller').css('position') != 'fixed')
             {    // Change the CSS of the scroller to hilight it and fix it at the top of the screen.
+                $('.scroller_anchor').css('height', '90vh');
                 $('.scroller').css({
                     'position': 'fixed',
-                    'top': '0px',
+                    'top': '0vh',
                     'z-index': '-1'
                 });
                 $('#slide1').css({'z-index':'-2'});
-                $('#slide2').css({'z-index':'-1'});
+                $('#slide2').css({'z-index':'1'});
                 // Changing the height of the scroller anchor to that of scroller so that there is no change in the overall height of the page.
-                $('.scroller_anchor').css('height', '90%');
+
             }
             else if ($(this).scrollTop() < scroller_anchor && $('.scroller').css('position') != 'relative')
             {    // If the user has scrolled back to the location above the scroller anchor place it back into the content.
 
                 // Change the height of the scroller anchor to 0 and now we will be adding the scroller back to the content.
-                $('.scroller_anchor').css('height', '0px');
+                $('.scroller_anchor').css('height', '0vh');
                 $('#slide1').css({'z-index':'1'});
                 $('#slide2').css({'z-index':'2'});
                 // Change the CSS and put it back to its original position.
@@ -188,18 +189,20 @@
             {    // Change the CSS of the scroller to hilight it and fix it at the top of the screen.
                 $('.scroller1').css({
                     'position': 'fixed',
-                    'top': '0px',
+                    'top': '0vh',
                     'z-index': '-1'
                 });
-
+                $('#slide2').css({'z-index':'-2'});
+                $('#slide3').css({'z-index':'1'});
                 // Changing the height of the scroller anchor to that of scroller so that there is no change in the overall height of the page.
-                $('.scroller_anchor1').css('height', '90%');
+                $('.scroller_anchor1').css('height', '90vh');
             }
             else if ($(this).scrollTop() < scroller_anchor && $('.scroller1').css('position') != 'relative')
             {    // If the user has scrolled back to the location above the scroller anchor place it back into the content.
-
+                $('#slide2').css({'z-index':'1'});
+                $('#slide3').css({'z-index':'2'});
                 // Change the height of the scroller anchor to 0 and now we will be adding the scroller back to the content.
-                $('.scroller_anchor1').css('height', '0px');
+                $('.scroller_anchor1').css('height', '0vh');
 
                 // Change the CSS and put it back to its original position.
                 $('.scroller1').css({
@@ -216,18 +219,20 @@
             {    // Change the CSS of the scroller to hilight it and fix it at the top of the screen.
                 $('.scroller2').css({
                     'position': 'fixed',
-                    'top': '0px',
+                    'top': '0vh',
                     'z-index': '-1'
                 });
-
+                $('#slide3').css({'z-index':'-2'});
+                $('#slide4').css({'z-index':'1'});
                 // Changing the height of the scroller anchor to that of scroller so that there is no change in the overall height of the page.
-                $('.scroller_anchor2').css('height', '90%');
+                $('.scroller_anchor2').css('height', '90vh');
             }
             else if ($(this).scrollTop() < scroller_anchor && $('.scroller2').css('position') != 'relative')
             {    // If the user has scrolled back to the location above the scroller anchor place it back into the content.
-
+                $('#slide3').css({'z-index':'1'});
+                $('#slide4').css({'z-index':'2'});
                 // Change the height of the scroller anchor to 0 and now we will be adding the scroller back to the content.
-                $('.scroller_anchor2').css('height', '0px');
+                $('.scroller_anchor2').css('height', '0vh');
 
                 // Change the CSS and put it back to its original position.
                 $('.scroller2').css({
@@ -247,13 +252,15 @@
                     'top': '0px',
                     'z-index': '-1'
                 });
-
+                $('#slide4').css({'z-index':'-2'});
+                $('#slide5').css({'z-index':'1'});
                 // Changing the height of the scroller anchor to that of scroller so that there is no change in the overall height of the page.
-                $('.scroller_anchor3').css('height', '90%');
+                $('.scroller_anchor3').css('height', '90vh');
             }
             else if ($(this).scrollTop() < scroller_anchor && $('.scroller3').css('position') != 'relative')
             {    // If the user has scrolled back to the location above the scroller anchor place it back into the content.
-
+                $('#slide4').css({'z-index':'1'});
+                $('#slide5').css({'z-index':'2'});
                 // Change the height of the scroller anchor to 0 and now we will be adding the scroller back to the content.
                 $('.scroller_anchor3').css('height', '0px');
 
