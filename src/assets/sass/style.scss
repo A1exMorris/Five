@@ -2,6 +2,7 @@
 @import"functions";
 @import"variables";
 
+
 @import "../../../bower_components/bootstrap/scss/mixins";
 
 
@@ -39,6 +40,7 @@
 @import "../../../bower_components/bootstrap/scss/custom-forms";
 @import "../../../bower_components/fancyBox/dist/jquery.fancybox";/*Full have to change to src*/
 
+@import "card";
 @import "custom";
 @import "footer";
 @import "parallax";
