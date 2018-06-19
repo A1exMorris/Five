@@ -20,7 +20,7 @@
 
 </head>
 
-<body style="padding-top: 92px">
+<body style="padding-top: 95px">
 <?php include "assets/layouts/navbar.php";?>
 <!--Navbar-->
 <a href="category.php?personal">

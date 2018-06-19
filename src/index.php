@@ -84,9 +84,7 @@
 
 
 <?php include 'assets/layouts/footer.php'?>
-    <div style="z-index:55; background-color: white;border-radius: 20%; height: 50px; width: 50px; display: none; position: fixed; right: 20px; bottom: 10px;" class="upTop">
-        <div class="arrow-up icon"></div>
-    </div>
+
     <!--Script section-->
     <script src="assets/js/main.js"></script>
   <script>

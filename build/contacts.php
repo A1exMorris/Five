@@ -19,7 +19,7 @@
 
 </head>
 
-<body style="padding-top: 92px;">
+<body style="padding-top: 95px;">
 <?php include "assets/layouts/navbar.php";?>
 <!--Navbar-->
 
@@ -77,14 +77,14 @@
 
  <!--   <img class="imageTrans" src="assets/i/piter.jpg" style="width: 120px; height: 120px; border-radius: 50%; position: absolute; right: 0;top: 0;">
     <div class="loader" style="position: absolute; right: 0;top:0;"></div>-->
-    <div class="container pt-5 pb-5 ">
+    <div class="container pt-4 pb-4 ">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-md-6">
                 <h1>Контакты</h1>
                 <p>Мы всегда рады новым встречам!</p>
                 <p>Тел.: 8 996 768 62 20</p>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6">
                 <div class="form-group">
                     <input type="text" class="form-control" id="guestName" placeholder="Ваше имя">
                 </div>

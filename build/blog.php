@@ -19,7 +19,7 @@
 
 </head>
 
-<body style="padding-top: 92px;">
+<body style="padding-top: 95px;">
 <?php include "assets/layouts/navbar.php";?>
 <!--Navbar-->
 <div class="container pb-5 pt-5 bg-secondary">

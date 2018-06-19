@@ -20,18 +20,17 @@
 
 </head>
 
-<body style="padding-top: 92px">
+<body style="padding-top: 95px">
 <?php include "assets/layouts/navbar.php";?>
 <!--Navbar-->
-<?php
-
-
-$segments=explode('?',$uri);
-
-
+<?php $segments=explode('?',$uri);
 $rootFoto=$segments[1];
-
 ?>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb rounded-0 bg-gray-light ">
+        <li class="breadcrumb-item active " ><a href="portfolio.php">Назад</a></li>
+    </ol>
+</nav>
 <div class="container">
     <div class="card-columns">
         <?php

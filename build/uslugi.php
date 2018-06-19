@@ -19,8 +19,10 @@
 
 </head>
 
-<body style="height: 100%;" >
+<body style="height: 100%; padding-top: 95px;" >
+
 <?php include "assets/layouts/navbar.php";?>
+
 <!--Navbar-->
 <!---->
 <!---->
@@ -33,54 +35,183 @@
 <!--<div class="envatologo">222</div>-->
 
 <div style="height:90vh; z-index: -3;"></div>
-<div class="slide " id="slide1" data-slide="1" data-stellar-ratio="1" style="z-index: 1; position: fixed; top:0;">
- <div class="row m-0 bg-white" style="height: 25vh"></div>
- <div class="row m-0 bg-gray-light" style="height: 50vh">
-     <div class="col-12 my-auto text-center"> <a href="#1">Индивидуальная фотосъемка</a></div>
- </div>
- <div class="row m-0 bg-white" style="height: 25vh"></div>
+<div class="slide " id="slide1" data-slide="1"  style="z-index: 1; position: fixed; top:0;">
+ <div class="row m-0 bg-white " style="height: 33vh"></div>
+    <a href="#1" data-toggle="modal" data-target="#ModalCenter1">
+         <div class="row m-0 bg-gray-100 text-gray-800" style="height: 34vh">
+             <div class="col-12 my-auto text-center h2"> Индивидуальная фотосъемка</div>
+         </div>
+    </a>
+ <div class="row m-0 bg-white " style="height: 33vh"></div>
 </div><!--End Slide 1-->
-
 <div class="scroller_anchor"></div>
-<div class="slide scroller" id="slide2" data-slide="2" data-stellar-ratio="1" style="z-index: 2;">
-    <div class="row m-0   bg-transparent" style="height: 25vh"></div>
-    <div class="row m-0 bg-primary" style="height: 50vh">
-        <div class="col-12 my-auto text-center"> <a href="#2">Love story, друзья </a></div>
-    </div>
-    <div class="row m-0   bg-transparent" style="height: 25vh"></div>
+<div class="slide scroller" id="slide2" data-slide="2"  style="z-index: 2;">
+    <div class="row m-0   bg-transparent " style="height: 33vh"></div>
+    <a href="#2"  data-toggle="modal" data-target="#ModalCenter2" >
+        <div class="row m-0 bg-gray-300 text-gray-800 " style="height: 34vh">
+            <div class="col-12 my-auto text-center h2">Love story, друзья </div>
+        </div>
+    </a>
+    <div class="row m-0   bg-transparent " style="height: 33vh"></div>
 </div><!--End Slide 2-->
 <div class="scroller_anchor1"></div>
-<div class="slide scroller1" id="slide3" data-slide="3" data-stellar-ratio="1" style="z-index: 2">
-    <div class="row m-0    bg-transparent" style="height: 25vh"></div>
-    <div class="row m-0 bg-info" style="height: 50vh">
-        <div class="col-12 my-auto text-center"> <a href="#3"> Семейная съемка </a></div>
-    </div>
-    <div class="row m-0    bg-transparent" style="height: 25vh"></div>
+<div class="slide scroller1" id="slide3" data-slide="3"  style="z-index: 2">
+    <div class="row m-0    bg-transparent " style="height: 33vh"></div>
+    <a href="#3"  data-toggle="modal" data-target="#ModalCenter3">
+        <div class="row m-0 bg-gray-400 text-gray-800" style="height: 34vh">
+            <div class="col-12 my-auto text-center h2"> Семейная съемка </div>
+        </div>
+    </a>
+    <div class="row m-0    bg-transparent " style="height: 33vh"></div>
 </div><!--End Slide 3-->
 <div class="scroller_anchor2"></div>
-<div class="slide scroller2" id="slide4" data-slide="3" data-stellar-ratio="1" style="z-index: 2">
-    <div class="row m-0    bg-transparent" style="height: 25vh"></div>
-    <div class="row m-0 bg-warning" style="height: 50vh" >
-        <div class="col-12 my-auto text-center"><a href="#4"> Подарочный сертификат </a></div>
-    </div>
-    <div class="row m-0    bg-transparent" style="height: 25vh"></div>
+<div class="slide scroller2" id="slide4" data-slide="3"  style="z-index: 2">
+    <div class="row m-0    bg-transparent " style="height: 33vh"></div>
+    <a href="#4"   data-toggle="modal" data-target="#ModalCenter4">
+        <div class="row m-0 bg-gray-600 text-gray-100" style="height: 34vh" >
+            <div class="col-12 my-auto text-center h2"> Подарочный сертификат </div>
+        </div>
+    </a>
+    <div class="row m-0    bg-transparent " style="height: 33vh"></div>
 </div><!--End Slide 4-->
 <div class="scroller_anchor3"></div>
-<div class="slide scroller3" id="slide5" data-slide="3" data-stellar-ratio="1" style="z-index: 2">
-    <div class="row m-0    bg-transparent" style="height: 25vh"></div>
-    <div class="row m-0 bg-success text-center align-self-center" style="height: 50vh" ">
-    <div class="col-12 my-auto"> <a href="#5">Дополнительные услуги</a></div>
-    </div>
-    <div class="row m-0    bg-transparent" style="height: 25vh"></div>
+<div class="slide scroller3" id="slide5" data-slide="3"  style="z-index: 2">
+    <div class="row m-0    bg-transparent " style="height: 33vh; pointer-events: none; "></div>
+    <a href="#5"  data-toggle="modal" data-target="#ModalCenter5">
+        <div class="row m-0 bg-gray-800 text-gray-100 text-center align-self-center" style="height: 34vh">
+            <div class="col-12 my-auto h2"> Дополнительные услуги </div>
+        </div>
+    </a>
+    <div class="row m-0    bg-white " style="height: 33vh;"></div>
 </div><!--End Slide 5-->
 
-<?php include 'assets/layouts/footer.php'?>
 
+<!-- Button trigger modal -->
+
+
+<?php //include 'assets/layouts/footer.php'?>
+<div style="z-index:55; background-color: white;border-radius: 20%; height: 50px; width: 50px; display: none; position: fixed; right: 20px; bottom: 10px;" class="upTop">
+    <div class="arrow-up icon"></div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalCenter1" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                1
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModalCenter2" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle2" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                2
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModalCenter3" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle3" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                3
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModalCenter4" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle4" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               4
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModalCenter5" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle5" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                5
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!--Footer-->
 <script src="assets/js/main.min.js"></script>
 <script>
     $(document).ready(function() {
 
+        
+
+        $('#slide1').click('shown.bs.modal', function (e) {
+            $('#myInput').trigger('focus')
+        });
+        $('#slide2').click('shown.bs.modal', function (e) {
+            $('#myInput').trigger('focus')
+        });
+        $('#slide3').click('shown.bs.modal', function (e) {
+            $('#myInput').trigger('focus')
+        });
+        $('#slide4').click('shown.bs.modal', function (e) {
+            $('#myInput').trigger('focus')
+        });
+        $('#slide5').click('shown.bs.modal', function (e) {
+            $('#myInput').trigger('focus')
+        });
 
         $(window).scroll(function(e) {
             // Get the position of the location where the scroller starts.
@@ -173,36 +304,36 @@
                 });
             }
         });
-        $(window).scroll(function(e) {
-            // Get the position of the location where the scroller starts.
-            var scroller_anchor = $(".scroller_anchor3").offset().top;
-
-            // Check if the user has scrolled and the current position is after the scroller start location and if its not already fixed at the top
-            if ($(this).scrollTop() > scroller_anchor && $('.scroller3').css('position') != 'fixed')
-            {    // Change the CSS of the scroller to hilight it and fix it at the top of the screen.
-                $('.scroller3').css({
-                    'position': 'fixed',
-                    'top': '0px',
-                    'z-index': '-1'
-                });
-                $('#slide4').css({'z-index':'-2'});
-                $('#slide5').css({'z-index':'1'});
-                // Changing the height of the scroller anchor to that of scroller so that there is no change in the overall height of the page.
-                $('.scroller_anchor3').css('height', '90vh');
-            }
-            else if ($(this).scrollTop() < scroller_anchor && $('.scroller3').css('position') != 'relative')
-            {    // If the user has scrolled back to the location above the scroller anchor place it back into the content.
-                $('#slide4').css({'z-index':'1'});
-                $('#slide5').css({'z-index':'2'});
-                // Change the height of the scroller anchor to 0 and now we will be adding the scroller back to the content.
-                $('.scroller_anchor3').css('height', '0px');
-
-                // Change the CSS and put it back to its original position.
-                $('.scroller3').css({
-                    'position': 'relative'
-                });
-            }
-        });
+//        $(window).scroll(function(e) {
+//            // Get the position of the location where the scroller starts.
+//            var scroller_anchor = $(".scroller_anchor3").offset().top;
+//
+//            // Check if the user has scrolled and the current position is after the scroller start location and if its not already fixed at the top
+//            if ($(this).scrollTop() > scroller_anchor && $('.scroller3').css('position') != 'fixed')
+//            {    // Change the CSS of the scroller to hilight it and fix it at the top of the screen.
+//                $('.scroller3').css({
+//                    'position': 'fixed',
+//                    'top': '0px',
+//                    'z-index': '-1'
+//                });
+//                $('#slide4').css({'z-index':'-2'});
+//                $('#slide5').css({'z-index':'1'});
+//                // Changing the height of the scroller anchor to that of scroller so that there is no change in the overall height of the page.
+//                $('.scroller_anchor3').css('height', '90vh');
+//            }
+//            else if ($(this).scrollTop() < scroller_anchor && $('.scroller3').css('position') != 'relative')
+//            {    // If the user has scrolled back to the location above the scroller anchor place it back into the content.
+//                $('#slide4').css({'z-index':'1'});
+//                $('#slide5').css({'z-index':'2'});
+//                // Change the height of the scroller anchor to 0 and now we will be adding the scroller back to the content.
+//                $('.scroller_anchor3').css('height', '0px');
+//
+//                // Change the CSS and put it back to its original position.
+//                $('.scroller3').css({
+//                    'position': 'relative'
+//                });
+//            }
+//        });
 
         //Cache some variables
         var links = $('.navigation').find('li');
