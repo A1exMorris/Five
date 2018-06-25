@@ -1,4 +1,11 @@
 $(window).ready(function(){
+    AOS.init({
+        easing: 'ease-in-out-sine'
+    });
+    window.addEventListener('load', AOS.refresh);
+
+
+
     /* немного другой эффект появления, и задержка в 2 секунды */
     $('.fadeInTitle').fadeIn(3000);
 
@@ -32,6 +39,7 @@ $(window).ready(function(){
     $('.upTop').click(
         function(e){
             $('html,body').animate({scrollTop: $('.upTop').height()-200},800);
+
         }
     );
 
@@ -49,5 +57,13 @@ $(window).ready(function(){
 
         }
     )
+
+});
+
+$(window).load(function () {
+    setTimeout(function(){
+        $('body').addClass('loaded');
+
+    });
 
 });

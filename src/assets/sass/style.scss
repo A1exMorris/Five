@@ -39,6 +39,9 @@
 @import "../../../bower_components/bootstrap/scss/print";
 @import "../../../bower_components/bootstrap/scss/custom-forms";
 @import "../../../bower_components/fancyBox/dist/jquery.fancybox";/*Full have to change to src*/
+@import "../../../bower_components/aos/src/sass/aos";/*Full have to change to src*/
+
+
 
 @import "card";
 @import "custom";
@@ -47,5 +50,6 @@
 @import "animation";
 @import "icons";
 @import "category";
+@import "loader";
 
 

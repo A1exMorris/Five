@@ -18,7 +18,14 @@
     max-width: 100%;
 
 
-    transform: scale(1.1); }
+    transform: scale(1.1) translate3d(0,0,0);
+    -webkit-webkit-transform: scale(1.1) translate3d(0px, 0px, 0px);
+    -moz-webkit-transform: scale(1.1) translate3d(0px, 0px, 0px);
+    -ms-webkit-transform: scale(1.1)  translate3d(0px, 0px, 0px);
+    -o-webkit-transform: scale(1.1) translate3d(0px, 0px, 0px);
+    -khtml-webkit-transform: scale(1.1) translate3d(0px, 0px, 0px);
+    webkit-transform: scale(1.1) translate3d(0px, 0px, 0px);
+  }
   }
 
 .scaleImage {

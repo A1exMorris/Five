@@ -27,7 +27,7 @@
 
 //= ../../../bower_components/waypoints/lib/jquery.waypoints.js
 
-
+//= ../../../bower_components/aos/dist/aos.js
 
 
 //= custom/tooltips.js

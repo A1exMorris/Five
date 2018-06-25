@@ -20,7 +20,7 @@
 
 </head>
 
-<body style="padding-top: 95px">
+<body style="padding-top: 95px" data-aos-easing="ease-out-back" data-aos-duration="1000" data-aos-delay="500" data-aos-offset="0">
 <?php include "assets/layouts/navbar.php";?>
 <!--Navbar-->
 <?php $segments=explode('?',$uri);
@@ -31,6 +31,9 @@ $rootFoto=$segments[1];
         <li class="breadcrumb-item active " ><a href="portfolio.php">Назад</a></li>
     </ol>
 </nav>
+<div id="loader-wrapper">
+    <div id="loader"></div>
+</div>
 <div class="container">
     <div class="card-columns">
         <?php
@@ -38,10 +41,10 @@ $rootFoto=$segments[1];
         $files=array_diff(scandir('assets/i/category/'.$rootFoto.'/'),array('..','.'));
 
         foreach ($files as $file) {?>
-            <div class="card" >
-            <a href = "assets/i/category/<?php echo $rootFoto.'/'.$file?>" data-fancybox = "gallery" data-caption = "Caption1" >
+            <div class="card" data-aos="fade-up" > <!--data-aos="slide-up"-->
+            <a href = "assets/i/category/<?php echo $rootFoto.'/'.$file?>" data-fancybox = "gallery"  >
                 <div class="hover-image" >
-                <img class="card-img-top scaleImage" src = "assets/i/category/<?php echo $rootFoto.'/'.$file?>" alt = "" />
+                <img class="card-img-top scaleImage"   src = "assets/i/category/<?php echo $rootFoto.'/'.$file?>" alt = "" />
                 <div class="icon-expand" ></div >
                     </div >
             </a >
@@ -53,7 +56,9 @@ $rootFoto=$segments[1];
 
 <?php include 'assets/layouts/footer.php'?>
 <!--Footer-->
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js">
+
+</script>
 
 </body>
 </html>
