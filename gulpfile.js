@@ -126,7 +126,7 @@ gulp.task("fonts:build", function() {
 gulp.task("image:build", function () {
     gulp.src(path.src.img)
         .pipe(imageResize({
-            width : 800
+            width : 400
         }))
         .pipe(imagemin({
             progressive: true,
@@ -138,7 +138,7 @@ gulp.task("image:build", function () {
 gulp.task("image:width", function () {
     gulp.src(path.src.img)
         .pipe(imageResize({
-            width : 2500
+            width : 1600
         }))
         .pipe(imagemin({
             progressive: true,

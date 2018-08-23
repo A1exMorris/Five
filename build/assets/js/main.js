@@ -22088,10 +22088,8 @@ $('.clampThis').each(function(index,element){
     $clamp(element,{clamp:element.parentNode.offsetHeight/3+'px',useNativeClamp:false});
 })
 $(window).ready(function(){
-    AOS.init({
-        easing: 'ease-in-out-sine'
-    });
-    window.addEventListener('load', AOS.refresh);
+
+
 
 
 
@@ -22154,5 +22152,7 @@ $(window).load(function () {
         $('body').addClass('loaded');
 
     });
-
+    AOS.init({
+        easing: 'ease-in-out-sine'
+    });
 });

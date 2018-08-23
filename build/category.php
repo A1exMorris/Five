@@ -20,14 +20,14 @@
 
 </head>
 
-<body style="padding-top: 95px" data-aos-easing="ease-out-back" data-aos-duration="1000" data-aos-delay="500" data-aos-offset="0">
+<body style="padding-top: 95px" >
 <?php include "assets/layouts/navbar.php";?>
 <!--Navbar-->
 <?php $segments=explode('?',$uri);
 $rootFoto=$segments[1];
 ?>
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb rounded-0 bg-gray-light ">
+    <ol class="breadcrumb rounded-0 bg-gray-light d-flex justify-content-center">
         <li class="breadcrumb-item active " ><a href="portfolio.php">Назад</a></li>
     </ol>
 </nav>
@@ -35,21 +35,41 @@ $rootFoto=$segments[1];
     <div id="loader"></div>
 </div>
 <div class="container">
-    <div class="card-columns">
-        <?php
+    <?php
 
-        $files=array_diff(scandir('assets/i/category/'.$rootFoto.'/'),array('..','.'));
+    $files=array_diff(scandir('assets/i/category/'.$rootFoto.'/'),array('..','.'));
 
-        foreach ($files as $file) {?>
+    if ( count($files)<15){
+        $columnsCount='card-columns2';
+    }
+    else{
+        $columnsCount='card-columns';
+    }
+    ?>
+
+
+    <div class=" <?php echo $columnsCount?>" >
+
+
+        <?php foreach ($files as $file) {?>
             <div class="card" data-aos="fade-up" > <!--data-aos="slide-up"-->
             <a href = "assets/i/category/<?php echo $rootFoto.'/'.$file?>" data-fancybox = "gallery"  >
                 <div class="hover-image" >
-                <img class="card-img-top scaleImage"   src = "assets/i/category/<?php echo $rootFoto.'/'.$file?>" alt = "" />
+                <img class="card-img-top scaleImage"   src = "assets/i/thumbs/category/<?php echo $rootFoto.'/'.$file?>" alt = "" />
                 <div class="icon-expand" ></div >
                     </div >
             </a >
         </div >
         <?php }?>
+
+ <!--       <div class="card" data-aos="fade-up" style="padding-top: 5px">
+        </div >
+
+        <div class="card" data-aos="fade-up" style="padding-top: 7px">
+        </div >
+
+        <div class="card" data-aos="fade-up" style="padding-top: 3px">
+        </div >-->
   </div>
 
 </div>

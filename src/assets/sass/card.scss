@@ -256,6 +256,9 @@
 .card-columns {
   .card {
     margin-bottom: $card-columns-margin;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   @include media-breakpoint-up(sm) {
@@ -272,9 +275,34 @@
     .card {
       display: inline-block; // Don't let them vertically span multiple columns
       width: 100%; // Don't let their width change
-      -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
-      page-break-inside: avoid; /* Firefox */
-      break-inside: avoid; /* IE 10+ */
+
+    }
+  }
+}
+
+.card-columns2 {
+  .card {
+    margin-bottom: $card-columns-margin;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  @include media-breakpoint-up(sm) {
+    column-count: 2;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+
+    column-gap: $card-columns-gap;
+    -webkit-column-gap: $card-columns-gap;
+    -moz-column-gap: $card-columns-gap;
+    orphans: 1;
+    widows: 1;
+
+    .card {
+      display: inline-block; // Don't let them vertically span multiple columns
+      width: 100%; // Don't let their width change
+
     }
   }
 }

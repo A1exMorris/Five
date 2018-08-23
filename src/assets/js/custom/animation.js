@@ -1,8 +1,6 @@
 $(window).ready(function(){
-    AOS.init({
-        easing: 'ease-in-out-sine'
-    });
-    window.addEventListener('load', AOS.refresh);
+
+
 
 
 
@@ -65,5 +63,7 @@ $(window).load(function () {
         $('body').addClass('loaded');
 
     });
-
+    AOS.init({
+        easing: 'ease-in-out-sine'
+    });
 });
