@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="assets/i/logo2.png">
+    <link rel="icon" href="assets/i/logo2(2).png">
 
     <title>NPhotography</title>
 
@@ -43,13 +43,13 @@
     </div>
     <div class="container-fluid mainContent p-0" style="width: 100%" >
         <div class="row no-gutters">
-            <div class="col-12 col-sm-6 h5 d-flex align-self-center text-center" style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif">
+            <div class="col-12 col-sm-6 h5 d-flex align-self-center text-center" style="font-family: cheltenham">
 
                 <div class="container p-2 p-md-5">
-                              <p class="h2 text-center" style="font-family: 'Conv_franklin-cword-normal-500',Sans-Serif">
+                              <p class="h2 text-center" style="font-family: cheltenham">
                                   Здравствуйте!
                               </p>
-                        Меня зовут Надежда, я фотограф.
+                        Меня зовут Надежда. Я фотограф.
                         <br><br>Рада видеть Вас на страницах моего сайта.
                         <br><br>
                         Тут я буду публиковать  свои лучшие работы.<br>

@@ -35,7 +35,11 @@
                 <ul class="my-1 pl-0 d-none d-md-block"><a href="reply.php">Отзывы</a></ul>
             </div>
             <div class="col-md-3 col-sm-12 justify-content-center d-flex align-self-center">
-                <span class="text-muted">Signature</span>
+                <img
+                            src="assets/sign2.svg"
+
+                            height="100px"
+                            width="100px" />
             </div>
         </div>
     </div>

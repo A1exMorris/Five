@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="assets/i/logo2.png">
+    <link rel="icon" href="assets/i/logo2(2).png">
 
     <title>NPhotography</title>
 
@@ -23,24 +23,33 @@
 
 <?php include "assets/layouts/navbar.php";?>
 
-<!--Navbar-->
-<!---->
-<!---->
-<!--<div class="navigation">-->
-<!--    <li data-slide="1" class="active">Slide1</li>-->
-<!--    <li data-slide="2" >Slide2</li>-->
-<!--    <li data-slide="3" >Slide3</li>-->
-<!--</div>-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="navigation" style="position: fixed; bottom: 10px; z-index: 10; display: inline; text-align: center; list-style-type: none;">
+                <li data-slide="1" class="active">Индивидуальная фотосъемка</li>
+                <li data-slide="2" >Лавстори, друзья</li>
+                <li data-slide="3" >Семейная съемка</li>
+                <li data-slide="4" >Подарочный сертификат</li>
+                <li data-slide="5" >Дополнительные услуги</li>
+            </div>
 
-<!--<div class="envatologo">222</div>-->
+        </div>
+        <div class="col-sm-4"></div>
 
-<div style="height:90vh; z-index: -3;"></div>
-<div class="slide " id="slide1" data-slide="1"  style="z-index: 1; position: fixed; top:0;">
+    </div>
+
+<div class="slide" id="slide1" data-slide="1"  style="z-index: 1; ; top:0;">
  <div class="row m-0 bg-white " style="height: 33vh"></div>
-    <a href="#1" data-toggle="modal" data-target="#ModalCenter1">
+    <a href="#1">
          <div class="row m-0 bg-gray-100 text-gray-800" style="height: 34vh">
-             <div class="col-12 my-auto text-center h2"> Индивидуальная фотосъемка</div>
+<!--             <div class="col-12 my-auto text-center h2 " style="font-family: cheltenham" style="font-family: cheltenham" > Индивидуальная фотосъемка</div>-->
+             <button type="button" class="btn btn-outline-primary btn-lg btn-block " style="font-family: cheltenham; white-space: normal;"  style="font-family: cheltenham" data-toggle="modal"  data-target="#ModalCenter1">
+                 <h2 class="pb-2">Индивидуальная фотосъемка</h2>
+                 Подробнее</button>
          </div>
+
     </a>
  <div class="row m-0 bg-white " style="height: 33vh"></div>
 </div><!--End Slide 1-->
@@ -49,7 +58,10 @@
     <div class="row m-0   bg-transparent " style="height: 33vh"></div>
     <a href="#2"  data-toggle="modal" data-target="#ModalCenter2" >
         <div class="row m-0 bg-gray-300 text-gray-800 " style="height: 34vh">
-            <div class="col-12 my-auto text-center h2">Love story, друзья </div>
+<!--            <div class="col-12 my-auto text-center h2 " style="font-family: cheltenham">Лавстори, друзья </div>-->
+            <button type="button" class="btn btn-outline-primary btn-lg btn-block " style="font-family: cheltenham; white-space: normal;"  data-toggle="modal" data-target="#ModalCenter2">
+                <h2>Лавстори, друзья</h2>
+                Подробнее</button>
         </div>
     </a>
     <div class="row m-0   bg-transparent " style="height: 33vh"></div>
@@ -59,27 +71,36 @@
     <div class="row m-0    bg-transparent " style="height: 33vh"></div>
     <a href="#3"  data-toggle="modal" data-target="#ModalCenter3">
         <div class="row m-0 bg-gray-400 text-gray-800" style="height: 34vh">
-            <div class="col-12 my-auto text-center h2"> Семейная съемка </div>
+<!--            <div class="col-12 my-auto text-center h2 " style="font-family: cheltenham"> Семейная съемка </div>-->
+            <button type="button" class="btn btn-outline-primary btn-lg btn-block " style="font-family: cheltenham; white-space: normal;"  data-toggle="modal" data-target="#ModalCenter3">
+                <h2 >Семейная съемка</h2>
+                Подробнее</button>
         </div>
     </a>
     <div class="row m-0    bg-transparent " style="height: 33vh"></div>
 </div><!--End Slide 3-->
 <div class="scroller_anchor2"></div>
-<div class="slide scroller2" id="slide4" data-slide="3"  style="z-index: 2">
+<div class="slide scroller2" id="slide4" data-slide="4"  style="z-index: 2">
     <div class="row m-0    bg-transparent " style="height: 33vh"></div>
     <a href="#4"   data-toggle="modal" data-target="#ModalCenter4">
         <div class="row m-0 bg-gray-600 text-gray-100" style="height: 34vh" >
-            <div class="col-12 my-auto text-center h2"> Подарочный сертификат </div>
+<!--            <div class="col-12 my-auto text-center h2 " style="font-family: cheltenham"> Подарочный сертификат </div>-->
+            <button type="button" class="btn btn-outline-gray-300 btn-lg btn-block " style="font-family: cheltenham; white-space: normal;" data-toggle="modal" data-target="#ModalCenter4">
+                <h2 >Подарочный сертификат</h2>
+                Подробнее</button>
         </div>
     </a>
     <div class="row m-0    bg-transparent " style="height: 33vh"></div>
 </div><!--End Slide 4-->
 <div class="scroller_anchor3"></div>
-<div class="slide scroller3" id="slide5" data-slide="3"  style="z-index: 2">
+<div class="slide scroller3" id="slide5" data-slide="5"  style="z-index: 2">
     <div class="row m-0    bg-transparent " style="height: 33vh; pointer-events: none; "></div>
     <a href="#5"  data-toggle="modal" data-target="#ModalCenter5">
         <div class="row m-0 bg-gray-800 text-gray-100 text-center align-self-center" style="height: 34vh">
-            <div class="col-12 my-auto h2"> Дополнительные услуги </div>
+<!--            <div class="col-12 my-auto text-center h2 " style="font-family: cheltenham"> Дополнительные услуги </div>-->
+            <button type="button" class="btn btn-outline-gray-100 btn-lg btn-block " style="font-family: cheltenham; white-space: normal;" data-toggle="modal" data-target="#ModalCenter5">
+                <h2 > Дополнительные услуги </h2>
+            Подробнее</button>
         </div>
     </a>
     <div class="row m-0    bg-white " style="height: 33vh;"></div>
@@ -95,7 +116,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="ModalCenter1" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle1" aria-hidden="true">
+<div class="modal fade" id="ModalCenter1" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle1" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -195,7 +216,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Дополнительные услуги</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle" style="font-family: cheltenham; white-space: normal;">Дополнительные услуги</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -209,6 +230,8 @@
             </div>
         </div>
     </div>
+</div>
+
 </div>
 <!--Footer-->
 <script src="assets/js/main.min.js"></script>
@@ -233,6 +256,7 @@
             $('#myInput').trigger('focus')
         });
 
+/*
         $(window).scroll(function(e) {
             // Get the position of the location where the scroller starts.
             var scroller_anchor = $(".scroller_anchor").offset().top;
@@ -354,6 +378,7 @@
 //                });
 //            }
 //        });
+*/
 
         //Cache some variables
         var links = $('.navigation').find('li');
@@ -398,7 +423,7 @@
         //easing plugin is also used, so we passed in the easing method of 'easeInOutQuint' which is available throught the plugin.
         function goToByScroll(dataslide) {
             htmlbody.animate({
-                scrollTop: $('.slide[data-slide="' + dataslide + '"]').offset().top
+                scrollTop: $('.slide[data-slide="' + dataslide + '"]').offset().top+1
             }, 2000, 'easeInOutQuint');
         }
 

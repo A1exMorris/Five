@@ -13091,6 +13091,44 @@ body, html {
     }
 }
 
+.navigation .active {
+    font-weight: bold;
+}
+
+.navigation ul {
+    overflow: auto;
+    list-style-type: none;
+}
+
+.navigation li {
+    height: 25px;
+    float: left;
+    margin-right: 0px;
+    border-right: 1px solid #aaa;
+    padding: 0 20px;
+}
+
+.navigation li:last-child {
+    border-right: none;
+}
+
+.navigation li a {
+    text-decoration: none;
+    color: #ccc;
+    font: 25px/1 Helvetica, Verdana, sans-serif;
+    text-transform: uppercase;
+    -webkit-transition: all 0.5s ease;
+}
+
+.navigation li a:hover {
+    color: #666;
+}
+
+.navigation li.active a {
+    font-weight: bold;
+    color: #333;
+}
+
 .hover-image {
     overflow: hidden;
 }
